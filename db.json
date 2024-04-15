@@ -6,7 +6,7 @@
       "email": "clientemail@example.com",
       "startDate": "2024-01-01",
       "endDate": "2024-12-31",
-      "totalServiceHoursIncluded": "5",
+      "totalServiceHoursIncluded": "200",
       "username": "User1",
       "password": "1234",
       "id": 1
@@ -17,7 +17,7 @@
       "email": "clientemail@example.com",
       "startDate": "2024-02-01",
       "endDate": "2025-01-31",
-      "totalServiceHoursIncluded": "2",
+      "totalServiceHoursIncluded": "36",
       "username": "User2",
       "password": "1234",
       "id": 2
@@ -28,7 +28,7 @@
       "email": "clientemail@example.com",
       "startDate": "2024-01-31",
       "endDate": "2025-02-28",
-      "totalServiceHoursIncluded": "2",
+      "totalServiceHoursIncluded": "196",
       "username": "User3",
       "password": "1234",
       "id": 3
