@@ -15,6 +15,7 @@ const TritonPortalComponent = () => {
   const [project, setProject] = useState({});
   const [projects, setProjects] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState('');
+  const [totalServiceHours, setTotalServiceHours] = useState(0);
   const [engineers, setEngineers] = useState([]);  // State to hold engineers
   const [selectedEngineerId, setSelectedEngineerId] = useState('');
   const [selectedEngineer] = useState(null);
@@ -93,8 +94,19 @@ const TritonPortalComponent = () => {
   const fetchProjectIssues = (projectId) => {
     fetch(`http://localhost:3001/issues?project=${projectId}`)
       .then(response => response.json())
-      .then(data => setProjectIssues(data))
+      .then(data => {
+        setProjectIssues(data);
+        calculateTotalServiceHours(data); // Calculate total hours whenever issues are fetched
+      })
       .catch(error => console.error('Error fetching project issues:', error));
+  };
+
+  const calculateTotalServiceHours = (issues) => {
+    const totalHours = issues.reduce((total, issue) => {
+      const hours = parseFloat(issue.hours) || 0;
+      return total + hours;
+    }, 0);
+    setTotalServiceHours(totalHours);
   };
 
   const handleChange = (e) => {
@@ -387,7 +399,6 @@ const handleFilterChange = (filter) => {
           <Tab className="custom-tab">Add/Edit Project</Tab>
           <Tab className="custom-tab">View Projects</Tab>
           <Tab className="custom-tab">Engineers</Tab>
-          <Tab className="custom-tab">Reports and KPI</Tab>
         </TabList>
 
 
@@ -399,6 +410,7 @@ const handleFilterChange = (filter) => {
   <input type="email" name="email" value={project.email || ''} placeholder="Email Address" onChange={handleChange} />
   <input type="date" name="startDate" value={project.startDate || ''} placeholder="Start Date" onChange={handleChange} />
   <input type="date" name="endDate" value={project.endDate || ''} placeholder="End Date" onChange={handleChange} />
+  <input type="number" name="totalServiceHoursIncluded" value={project.totalServiceHoursIncluded || ''} placeholder="Total Service Hours Included" onChange={handleChange} />
   <input type="text" name="username" value={project.username || ''} placeholder="Username" onChange={handleChange} />
   <input type="password" name="password" value={project.password || ''} placeholder="Password" onChange={handleChange} />
   {isEditing ? (
@@ -429,6 +441,8 @@ const handleFilterChange = (filter) => {
             <p className="project-detail"><span className="detail-label">Email:</span> {project.email}</p>
             <p className="project-detail"><span className="detail-label">Start Date:</span> {project.startDate}</p>
             <p className="project-detail"><span className="detail-label">End Date:</span> {project.endDate}</p>
+            <p className="project-detail"><span className="detail-label">Total Service Hours Included:</span> {project.totalServiceHoursIncluded}</p>
+            <p className="project-detail"><span className="detail-label">Total Service Hours:</span> {totalServiceHours}</p>
               <button className="edit-button" onClick={() => handleEditProject(project.id)}>Edit</button>
               <button className="remove-button" onClick={() => handleRemoveProject(project.id)}>Remove</button>
               <button className="new-request-button" onClick={openNewIssueForm} style={{ display: showIssueForm ? 'none' : 'inline-block' }}>New Request</button>

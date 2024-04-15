@@ -64,6 +64,7 @@
 .form input[type="date"],
 .form input[type="email"],
 .form input[type="password"],
+.form input[type="number"],
 .form textarea,
 .form select {
   width: 100%;

@@ -6,6 +6,7 @@
       "email": "clientemail@example.com",
       "startDate": "2024-01-01",
       "endDate": "2024-12-31",
+      "totalServiceHoursIncluded": "5",
       "username": "User1",
       "password": "1234",
       "id": 1
@@ -16,6 +17,7 @@
       "email": "clientemail@example.com",
       "startDate": "2024-02-01",
       "endDate": "2025-01-31",
+      "totalServiceHoursIncluded": "2",
       "username": "User2",
       "password": "1234",
       "id": 2
@@ -26,6 +28,7 @@
       "email": "clientemail@example.com",
       "startDate": "2024-01-31",
       "endDate": "2025-02-28",
+      "totalServiceHoursIncluded": "2",
       "username": "User3",
       "password": "1234",
       "id": 3
@@ -85,8 +88,8 @@
       "engineer": "Isaac Miramontes",
       "activities": "",
       "serviceType": "Preventative Maintenance (Site)",
-      "hours": "",
-      "lastUpdated": "2024-04-15T16:24:46.725Z",
+      "hours": "3",
+      "lastUpdated": "2024-04-15T21:52:29.115Z",
       "projectId": 1,
       "id": 1
     },
@@ -102,11 +105,12 @@
       "status": "Open",
       "scheduleDate": "",
       "dateOfService": "",
-      "engineer": "",
+      "engineer": "Mohsen Sajjadi",
       "activities": "",
       "serviceType": "",
-      "hours": "",
-      "lastUpdated": "4/10/2024, 15:14:54",
+      "hours": "3",
+      "lastUpdated": "2024-04-15T22:25:03.266Z",
+      "projectId": 1,
       "id": 2
     },
     {
@@ -180,11 +184,11 @@
       "status": "Open",
       "scheduleDate": "",
       "dateOfService": "",
-      "engineer": "Nikola Angelov",
+      "engineer": " Mano Sundararaj",
       "activities": "",
       "serviceType": "",
       "hours": "",
-      "lastUpdated": "2024-04-15T19:56:02.649Z",
+      "lastUpdated": "2024-04-15T22:26:51.997Z",
       "projectId": 1,
       "id": 6
     },
