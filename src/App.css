@@ -5,15 +5,19 @@
 }
 
 .app-header {
-  background-color: #08284d; /* Adjust the color to match your header */
+  display: flex;
+  justify-content: center; /* Center children horizontally */
+  align-items: center; /* Center children vertically */
+  background-color: #172d47; /* Adjust the color to match your header */
   color: #ffffff;
   padding: 20px;
   text-align: center;
+  flex-direction: column; /* Stack children vertically */
 }
 
 .app-logo {
   height: 70px; /* Adjust as needed */
-  margin-right: 30px;
+  margin-bottom: 10px; /* Space between logo and title */
 }
 
 .app-nav ul {
@@ -21,7 +25,7 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333; /* Adjust to match your navigation background */
+  background-color: #2c2b2b; /* Adjust to match your navigation background */
 }
 
 .app-nav li {
@@ -168,7 +172,7 @@ input {
 
 .custom-tab {
   display: inline-block;
-  border: 1px solid #616369;
+  border: 1px solid #546bb1;
   border-bottom: none;
   bottom: -1px;
   position: relative;

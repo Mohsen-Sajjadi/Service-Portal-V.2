@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Login from '../Login'; // Ensure this path is correct
-import { authenticateUser } from '../authService'; // Ensure this path is correct
+import { useAuth0 } from '@auth0/auth0-react'; // Import Auth0 hooks
 import IssueFormClient from './IssueFormClient'; // Make sure this path matches the location of your IssueFormClient component
 import { downloadCSV } from '../utils'; // Adjust the path as necessary
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import IssueModal from './IssueModal';
 
+
 const ClientPortalComponent = () => {
   const [project, setProject] = useState(null);
+  const { user, isAuthenticated } = useAuth0();
   const [showIssueForm, setShowIssueForm] = useState(false);
   const [projectIssues, setProjectIssues] = useState([]);
   const [selectedIssue, setSelectedIssue] = useState(null); // Define state for selectedIssue
@@ -34,54 +35,79 @@ const ClientPortalComponent = () => {
     hours: '',
   });
 
+
+  useEffect(() => {
+    const fetchProjectData = () => {
+      if (isAuthenticated && user.email) {
+        fetch(`http://localhost:3001/projects?email=${encodeURIComponent(user.email)}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.length > 0) {
+              setProject(data[0]);
+            } else {
+              console.log("User doesn't have access to any project.");
+            }
+          })
+          .catch(error => console.error('Error fetching project data:', error));
+      }
+    };
+
+    fetchProjectData();
+  }, [isAuthenticated, user]);
+
+
+
   // Function to find project name by ID
   const getProjectNameById = (projectId) => {
     const project = projects.find(proj => proj.id.toString() === projectId.toString());
     return project ? project.project : 'Unknown Project';
   };
-  // Function to format current date as YYYY-MM-DD
-const formatDate = (date) => {
-  const d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
 
-  return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
-};
+ // Function to format current date as YYYY-MM-DD
+  const formatDate = (date) => {
+    const d = new Date(date),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+
+    return [year, month.padStart(2, '0'), day.padStart(2, '0')].join('-');
+  };
+
 const prepareIssuesForDownload = (issues) => {
-  return issues.map(issue => ({
-    ...issue,
-    projectName: getProjectNameById(issue.project), // Add the project name
-    project: undefined // Optionally remove the project ID if it's not needed
-  }));
-};
+    return issues.map(issue => ({
+      ...issue,
+      projectName: getProjectNameById(issue.project), // Add the project name
+      project: undefined // Optionally remove the project ID if it's not needed
+    }));
+  };
 
 
 
-const [selectedProjectId] = useState(null)
-const [projects] = useState([]); // Assuming this is meant to hold an array of projects
+  const [selectedProjectId] = useState(null)
+  const [projects] = useState([]); // Assuming this is meant to hold an array of projects
 
-const onRemoveIssue = (issueId) => {
-  fetch(`http://localhost:3001/issues/${issueId}`, {
-    method: 'DELETE',
-  })
-  .then(response => {
-    if (response.ok) {
-      // Update the state to remove the issue
-      setProjectIssues(currentIssues => currentIssues.filter(issue => issue.id !== issueId));
-      
-      // Close the form. Assuming you have a function like this to hide the form
-      toggleIssueFormVisibility(); // Or use setShowIssueForm(false) directly if you don't have a toggle function
-    } else {
-      // Handle any errors or unsuccessful deletion attempts here
-      console.error('Failed to delete the issue.');
-    }
-  })
-  .catch(error => {
-    // Handle any network errors or issues with the fetch operation
-    console.error('Error removing issue:', error);
-  });
-};
+
+  const onRemoveIssue = (issueId) => {
+    fetch(`http://localhost:3001/issues/${issueId}`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        // Update the state to remove the issue
+        setProjectIssues(currentIssues => currentIssues.filter(issue => issue.id !== issueId));
+        
+        // Close the form. Assuming you have a function like this to hide the form
+        toggleIssueFormVisibility(); // Or use setShowIssueForm(false) directly if you don't have a toggle function
+      } else {
+        // Handle any errors or unsuccessful deletion attempts here
+        console.error('Failed to delete the issue.');
+      }
+    })
+    .catch(error => {
+      // Handle any network errors or issues with the fetch operation
+      console.error('Error removing issue:', error);
+    });
+  };
 
   // Adjusted button onClick handler for downloading issues CSV
   const handleDownloadIssuesCSV = () => {
@@ -99,14 +125,15 @@ const onRemoveIssue = (issueId) => {
     downloadCSV(preparedIssues, filename);
   };
   
-console.log(selectedProjectId); // Check the selectedProjectId value
-console.log(projects); // Log the entire projects array to inspect IDs
+  console.log(selectedProjectId); // Check the selectedProjectId value
+  console.log(projects); // Log the entire projects array to inspect IDs
+
   
 const filteredIssues = projectIssues.filter(issue => {
-  const createdDate = new Date(issue.createdDate);
-  const scheduleDate = new Date(issue.scheduleDate);
-  const dateOfService = new Date(issue.dateOfService);
-  return (
+    const createdDate = new Date(issue.createdDate);
+    const scheduleDate = new Date(issue.scheduleDate);
+    const dateOfService = new Date(issue.dateOfService);
+    return (
       // Check if the current filter matches the issue's label or if "All Items" is selected
       (currentFilter === 'All Items' ||
        (currentFilter === 'Service Items' && issue.label === 'Service') ||
@@ -145,9 +172,8 @@ const handleEditIssue = (issue) => {
   setSelectedIssue(issue);
   setShowIssueForm(true);
 };
-  const handleLogin = (username, password) => {
-    authenticateUser(username, password, setProject);
-  };
+
+
 
   // This function will be passed to the IssueFormClient as hideForm
   const toggleIssueFormVisibility = () => {
@@ -195,7 +221,7 @@ const formatDateToLocal = (isoDateString) => {
   return (
     <div>
       {!project ? (
-        <Login onLogin={handleLogin} />
+        <p>Loading...</p>
       ) : (
         <div className="project-card">
           <h1 className="project-title">Project Name: {project.project}</h1>

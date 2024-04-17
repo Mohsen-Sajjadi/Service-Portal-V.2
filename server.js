@@ -4,6 +4,8 @@ const jsonServer = require('json-server');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser'); // Import body-parser to parse JSON body in requests
+const { expressjwt: jwt } = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
 
 // Create a JSON Server instance
 const server = jsonServer.create();
@@ -18,6 +20,19 @@ server.use(cors());
 
 // Use body-parser middleware to parse JSON bodies
 server.use(bodyParser.json());
+
+// JWT validation setup
+const checkJwt = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
+  }),
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+  algorithms: ['RS256']
+});
 
 // Enhanced Logging for debugging purposes
 server.use((req, res, next) => {
@@ -40,6 +55,16 @@ const transporter = nodemailer.createTransport({
     rejectUnauthorized: false
   }
 });
+
+// Role-based access control (RBAC) middleware
+const checkRole = (role) => (req, res, next) => {
+  const roles = req.user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || [];
+  if (roles.includes(role)) {
+    next();
+  } else {
+    res.status(401).send('Insufficient role');
+  }
+};
 
 // Intercept JSON Server's default routing and add custom route
 server.use((req, res, next) => {
@@ -64,6 +89,9 @@ server.use((req, res, next) => {
     next();
   }
 });
+
+// Apply JWT Auth and role check middleware to secure the routes
+server.use('/api', checkJwt, checkRole('admin'), router);
 
 // Test endpoint for checking POST requests
 server.post('/test-post', (req, res) => {

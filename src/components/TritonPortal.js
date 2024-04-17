@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { withAuthenticationRequired } from '@auth0/auth0-react';
-import Loading from './Loading';
+import React, { useState, useEffect, useRef, useCallback} from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import '../App.css';
 import IssueForm from './IssueForm';
-import { downloadCSV } from '../utils'; // Adjust the path as necessary
+import { downloadCSV } from '../utils';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import IssueModal from './IssueModal';
 
 
 const TritonPortalComponent = () => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const [project, setProject] = useState({});
   const [projects, setProjects] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState('');
@@ -47,6 +47,25 @@ const TritonPortalComponent = () => {
     serviceType: '',
     hours: '',
   });
+
+  useEffect(() => {
+    console.log("Authenticated:", isAuthenticated);
+    console.log("Roles:", user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
+  }, [user, isAuthenticated]);
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      return; // Optionally handle a redirect here or show a message
+    }
+
+    if (isAuthenticated && user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('admin')) {
+      fetchProjects();
+      fetchEngineers();
+    } else {
+      console.log("User is not an admin or not authenticated.");
+    }
+  }, [isAuthenticated, isLoading, user]); 
+
   useEffect(() => {
     if (showIssueForm) {
       issueFormRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -57,12 +76,7 @@ const TritonPortalComponent = () => {
     fetchProjects();
   }, []);
 
-  useEffect(() => {
-    if (selectedProjectId) {
-      fetchProjectIssues(selectedProjectId);
-    }
-  }, [selectedProjectId]);
-
+  
   const fetchProjects = () => {
     fetch('http://localhost:3001/projects')
       .then(response => response.json())
@@ -91,7 +105,7 @@ const TritonPortalComponent = () => {
       .catch(error => console.error('Error fetching project:', error));
   };
 
-  const fetchProjectIssues = (projectId) => {
+  const fetchProjectIssues = useCallback((projectId) => {
     fetch(`http://localhost:3001/issues?project=${projectId}`)
       .then(response => response.json())
       .then(data => {
@@ -99,7 +113,13 @@ const TritonPortalComponent = () => {
         calculateTotalServiceHours(data); // Calculate total hours whenever issues are fetched
       })
       .catch(error => console.error('Error fetching project issues:', error));
-  };
+  }, []);
+
+  useEffect(() => {
+    if (selectedProjectId) {
+      fetchProjectIssues(selectedProjectId);
+    }
+  }, [selectedProjectId, fetchProjectIssues]);
 
   const calculateTotalServiceHours = (issues) => {
     const totalHours = issues.reduce((total, issue) => {
@@ -407,6 +427,7 @@ const handleFilterChange = (filter) => {
           <form onSubmit={handleSubmit} className="form">
   <input type="text" name="project" value={project.project || ''} placeholder="Project Name" onChange={handleChange} />
   <input type="text" name="client" value={project.client || ''} placeholder="Client Name" onChange={handleChange} />
+  <input type="text" name="address" value={project.address || ''} placeholder="Address" onChange={handleChange} /> 
   <input type="email" name="email" value={project.email || ''} placeholder="Email Address" onChange={handleChange} />
   <input type="date" name="startDate" value={project.startDate || ''} placeholder="Start Date" onChange={handleChange} />
   <input type="date" name="endDate" value={project.endDate || ''} placeholder="End Date" onChange={handleChange} />
@@ -438,6 +459,7 @@ const handleFilterChange = (filter) => {
             {/* Display selected project details */}
             <p className="project-detail"><span className="detail-label">Project Name:</span> {project.project}</p>
             <p className="project-detail"><span className="detail-label">Client Name:</span> {project.client}</p>
+            <p className="project-detail"><span className="detail-label">Address:</span> {project.address}</p>
             <p className="project-detail"><span className="detail-label">Email:</span> {project.email}</p>
             <p className="project-detail"><span className="detail-label">Start Date:</span> {project.startDate}</p>
             <p className="project-detail"><span className="detail-label">End Date:</span> {project.endDate}</p>
@@ -751,6 +773,6 @@ const handleFilterChange = (filter) => {
   />
 )}
 </div>
- );
+  );
 };
-export default withAuthenticationRequired(TritonPortalComponent, { onRedirecting: () => <Loading /> });
+export default TritonPortalComponent; 
