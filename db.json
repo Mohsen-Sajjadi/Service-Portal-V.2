@@ -9,7 +9,6 @@
       "endDate": "2024-12-31",
       "totalServiceHoursIncluded": "200",
       "username": "User1",
-      "password": "1234",
       "id": 1
     },
     {
@@ -21,7 +20,6 @@
       "endDate": "2025-01-31",
       "totalServiceHoursIncluded": "36",
       "username": "User2",
-      "password": "1234",
       "id": 2
     },
     {
@@ -33,7 +31,6 @@
       "endDate": "2025-02-28",
       "totalServiceHoursIncluded": "196",
       "username": "User3",
-      "password": "1234",
       "id": 3
     },
     {
@@ -44,7 +41,6 @@
       "startDate": "2023-05-01",
       "endDate": "2024-05-01",
       "username": "User4",
-      "password": "1234",
       "email": "Client@example.com",
       "id": 4
     }

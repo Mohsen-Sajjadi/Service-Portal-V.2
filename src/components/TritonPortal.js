@@ -433,7 +433,6 @@ const handleFilterChange = (filter) => {
   <input type="date" name="endDate" value={project.endDate || ''} placeholder="End Date" onChange={handleChange} />
   <input type="number" name="totalServiceHoursIncluded" value={project.totalServiceHoursIncluded || ''} placeholder="Total Service Hours Included" onChange={handleChange} />
   <input type="text" name="username" value={project.username || ''} placeholder="Username" onChange={handleChange} />
-  <input type="password" name="password" value={project.password || ''} placeholder="Password" onChange={handleChange} />
   {isEditing ? (
               <>
                 <button type="button" className="cancel-button" onClick={handleCancelEdit}>Cancel</button>
