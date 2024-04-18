@@ -7,7 +7,7 @@ const IssueModal = ({ content, onClose }) => {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-      <p className="modal-text">This is some long text that should wrap inside the modal. Make sure it wraps correctly and fits within the modal's content area.</p>
+      <p className="modal-text"></p>
       <h3>Issue Details</h3>
         {/* Display the issue details */}
         <p>Description: {content.issueDescription}</p>

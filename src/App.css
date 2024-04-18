@@ -21,15 +21,16 @@
 }
 
 .app-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  display: flex;
+  width: 100%; /* Ensure the ul spans the entire width of the nav */
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
   background-color: #2c2b2b; /* Adjust to match your navigation background */
+  align-items: center;
 }
 
 .app-nav li {
-  float: left;
+  display: inline; /* Align list items in a line */
 }
 
 .app-nav li a {
@@ -44,6 +45,18 @@
   background-color: #111; /* Hover effect color */
 }
 
+.app-nav {
+  margin-left: auto;
+}
+
+.login-button {
+  padding: 15px 30px; /* Adjust padding as needed */
+  background-color: #007bff; /* Example background color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
 .app-main {
   padding: 20px;
 }
@@ -808,26 +821,6 @@ input[name="hours"] {
   align-items: center;
 }
 
-.app-nav {
-  margin-left: auto;
-}
-
-.login-button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.4s;
-}
-
-.login-button:hover {
-  background-color: #45a049; /* Darker Green */
-}
 .engineer-form-container .form-group input {
   width: 100%; /* Ensures the input takes the full width of its container */
   padding: 8px; /* Provides padding inside the input for text */

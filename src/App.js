@@ -7,10 +7,27 @@ import ClientPortal from './components/ClientPortal';
 import IssueDetails from './components/IssueDetails';
 import logo from './triton-logo.png';
 import './App.css';
-import RequireRole from './components/RequireRole'; // Ensure this component is correctly imported from its file
+import RequireRole from './components/RequireRole'; 
 
 function App() {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin });
+    window.location.reload();
+  };
+
+  const loginToClientPortal = () => {
+    loginWithRedirect({
+      appState: { targetUrl: '/client' }
+    });
+  };
+
+  const loginToTritonPortal = () => {
+    loginWithRedirect({
+      appState: { targetUrl: '/triton' }
+    });
+  };
 
   return (
     <Router>
@@ -21,14 +38,14 @@ function App() {
         </header>
         <nav className="app-nav">
           <ul>
-            <li><Link to="/">Home</Link></li>
+            <li><Link to="/" onClick={handleLogout}>Home</Link></li>
             <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/client">Client Portal</Link></li>
             <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/triton">Triton Portal</Link></li>
           </ul>
         </nav>
         <main className="app-main">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home isAuthenticated={isAuthenticated} loginToClientPortal={loginToClientPortal} loginToTritonPortal={loginToTritonPortal} />} />
             <Route path="/client" element={
               <RequireRole role="user">
                 <ClientPortal />
