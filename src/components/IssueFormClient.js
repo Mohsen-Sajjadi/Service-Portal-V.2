@@ -4,11 +4,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue, onIssueSubmitSuccess }, ref) => {
     const [newIssue, setNewIssue] = useState({
-        project: projectId, // This is crucial to ensure the correct project ID is used
+        project: projectId,
         issueDescription: issue?.issueDescription || '',
         siteBuilding: issue?.siteBuilding || '',
         requestedBy: issue?.requestedBy || '',
-        // Ensure dates are handled correctly, particularly the createdDate
         createdDate: issue?.createdDate ? issue.createdDate.split('T')[0] : new Date().toISOString().split('T')[0],
         label: issue?.label || '',
         attachedFile: issue?.attachedFile || null,
@@ -25,7 +24,7 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
     useEffect(() => {
         if (issue) {
             setNewIssue({
-                project: projectId, // Make sure this aligns with backend expectations
+                project: projectId,
                 issueDescription: issue.issueDescription,
                 siteBuilding: issue.siteBuilding,
                 requestedBy: issue.requestedBy,
@@ -59,14 +58,26 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
     };
 
     const handleFileChange = (event) => {
+        const file = event.target.files[0];
         setNewIssue({
             ...newIssue,
-            attachedFile: event.target.files[0] ? event.target.files[0].name : null,
+            attachedFile: file,
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // Upload file if attached
+        if (newIssue.attachedFile) {
+            const filePath = await uploadFile();
+            setNewIssue({
+                ...newIssue,
+                attachedFile: filePath,
+            });
+        }
+
+        // Submit the issue here
         const issueWithLastUpdated = {
             ...newIssue,
             project: parseInt(projectId, 10),
@@ -121,7 +132,30 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
             onIssueSubmitSuccess();
         });
     };
-    
+
+    const uploadFile = async () => {
+        const formData = new FormData();
+        formData.append('attachedFile', newIssue.attachedFile);
+        formData.append('projectId', projectId);
+        formData.append('issueId', issue ? issue.id : ''); // Issue Id for updating, if available
+
+        try {
+            const response = await fetch('http://localhost:3001/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to upload file');
+            }
+
+            const data = await response.json();
+            return data.filePath; // return the file path
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            return null;
+        }
+    };
 
     const handleRemove = () => {
         if (issue && window.confirm('Are you sure you want to delete this issue?')) {
@@ -130,14 +164,12 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
     };
 
     const handleCancel = () => {
-        console.log('hideForm is:', hideForm);
         if (typeof hideForm === 'function') {
             hideForm();
         } else {
             console.error('hideForm is not a function');
         }
     };
-
 
     return (
         <div ref={ref} className="form-container">
