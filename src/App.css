@@ -835,3 +835,9 @@ input[name="hours"] {
   border-color: #66afe9; /* Changes border color on focus for better visibility */
   box-shadow: 0 0 8px rgba(102, 175, 233, 0.6); /* Adds a subtle shadow around the input when focused */
 }
+.project-info {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #2a416f;
+  line-height: 1.5;
+}

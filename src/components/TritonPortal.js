@@ -417,8 +417,8 @@ const handleFilterChange = (filter) => {
       <Tabs className="custom-tabs">
         <TabList className="custom-tab-list">
           <Tab className="custom-tab">Add/Edit Project</Tab>
-          <Tab className="custom-tab">View Projects</Tab>
           <Tab className="custom-tab">Engineers</Tab>
+          <Tab className="custom-tab">View Projects</Tab>
           <Tab className="custom-tab">KPI and Reports</Tab>
         </TabList>
 
@@ -445,7 +445,49 @@ const handleFilterChange = (filter) => {
           </form>
         </TabPanel>
 
-        <TabPanel>
+
+<TabPanel>
+  <div className="engineer-form-container">
+    <h2>Engineers</h2>
+    <select
+      value={selectedEngineerId}
+      onChange={handleChangeEngineer}
+    >
+      <option value="">Select an Engineer</option>
+      {engineers.map((engineer) => (
+        <option key={engineer.id} value={engineer.id}>
+          {engineer.name}
+        </option>
+      ))}
+    </select>
+    <button onClick={handleClearForm} style={{ marginLeft: '10px' }}>Add New Engineer</button>
+
+    <form onSubmit={handleEngineerSubmit}>
+      <div className="form-group">
+        <label>Name:</label>
+        <input
+          type="text"
+          value={engineerName}
+          onChange={(e) => setEngineerName(e.target.value)}
+          placeholder="Engineer's Name"
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label>Email:</label>
+        <input
+          type="email"
+          value={engineerEmail}
+          onChange={(e) => setEngineerEmail(e.target.value)}
+          placeholder="Engineer's Email"
+          required
+        />
+      </div>
+      <button type="submit" className="add-button">{selectedEngineerId ? "Update Engineer" : "Add Engineer"}</button>
+    </form>
+  </div>
+</TabPanel>
+<TabPanel>
           <h2>View Projects</h2>
           <select onChange={handleSelectProject} value={selectedProjectId}>
             <option value="">Select a project</option>
@@ -718,48 +760,6 @@ const handleFilterChange = (filter) => {
 ))}
 </tbody>
 </table>
-</TabPanel>
-
-<TabPanel>
-  <div className="engineer-form-container">
-    <h2>Engineers</h2>
-    <select
-      value={selectedEngineerId}
-      onChange={handleChangeEngineer}
-    >
-      <option value="">Select an Engineer</option>
-      {engineers.map((engineer) => (
-        <option key={engineer.id} value={engineer.id}>
-          {engineer.name}
-        </option>
-      ))}
-    </select>
-    <button onClick={handleClearForm} style={{ marginLeft: '10px' }}>Add New Engineer</button>
-
-    <form onSubmit={handleEngineerSubmit}>
-      <div className="form-group">
-        <label>Name:</label>
-        <input
-          type="text"
-          value={engineerName}
-          onChange={(e) => setEngineerName(e.target.value)}
-          placeholder="Engineer's Name"
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Email:</label>
-        <input
-          type="email"
-          value={engineerEmail}
-          onChange={(e) => setEngineerEmail(e.target.value)}
-          placeholder="Engineer's Email"
-          required
-        />
-      </div>
-      <button type="submit" className="add-button">{selectedEngineerId ? "Update Engineer" : "Add Engineer"}</button>
-    </form>
-  </div>
 </TabPanel>
 <TabPanel>
   <KpiComponent />

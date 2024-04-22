@@ -210,18 +210,18 @@ const KpiComponent = () => {
   
       {/* Display selected project details in card format only if a project is selected */}
       {selectedProject && selectedProject.id && (
-        <div className="project-details">
-          <h3>{selectedProject.project}</h3>
-          <p><strong>Client:</strong> {selectedProject.client}</p>
-          <p><strong>Address:</strong> {selectedProject.address}</p>
-          <p><strong>Email:</strong> {selectedProject.email}</p>
-          <p><strong>Start Date:</strong> {selectedProject.startDate}</p>
-          <p><strong>End Date:</strong> {selectedProject.endDate}</p>
-          <p><strong>Total Service Hours Included:</strong> {selectedProject.totalServiceHoursIncluded}</p>
-          <p><strong>Total Service Hours:</strong> {totalServiceHours.toFixed(2)}</p>
-          <p><strong>Username:</strong> {selectedProject.username}</p>
-        </div>
-        )}
+  <div className="project-details">
+    <h3 className="project-title">{selectedProject.project}</h3>
+    <p className="project-info"><strong>Client:</strong> {selectedProject.client}</p>
+    <p className="project-info"><strong>Address:</strong> {selectedProject.address}</p>
+    <p className="project-info"><strong>Email:</strong> {selectedProject.email}</p>
+    <p className="project-info"><strong>Start Date:</strong> {selectedProject.startDate}</p>
+    <p className="project-info"><strong>End Date:</strong> {selectedProject.endDate}</p>
+    <p className="project-info"><strong>Total Service Hours Included:</strong> {selectedProject.totalServiceHoursIncluded}</p>
+    <p className="project-info"><strong>Total Service Hours:</strong> {totalServiceHours.toFixed(2)}</p>
+    <p className="project-info"><strong>Username:</strong> {selectedProject.username}</p>
+  </div>
+)}
         <h2>Issue Reports</h2>
       <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download CSV</button>
       {/* Filter Bar */}
