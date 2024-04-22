@@ -143,6 +143,7 @@ const filteredIssues = projectIssues.filter(issue => {
       (!filters.searchText || issue.issueDescription.toLowerCase().includes(filters.searchText.toLowerCase())) &&
       (!filters.priority || issue.priority === filters.priority) &&
       (!filters.status || issue.status === filters.status) &&
+      (!filters.label || issue.label === filters.label) &&
       (!filters.siteBuilding || issue.siteBuilding.toLowerCase().includes(filters.siteBuilding.toLowerCase())) &&
       (!filters.requestedBy || issue.requestedBy.toLowerCase().includes(filters.requestedBy.toLowerCase())) &&
       (!filters.createdDateStart || (createdDate && createdDate >= new Date(filters.createdDateStart))) &&

@@ -8,6 +8,7 @@ import { downloadCSV } from '../utils';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import IssueModal from './IssueModal';
+import KpiComponent from './KpiComponent';
 
 
 const TritonPortalComponent = () => {
@@ -372,27 +373,26 @@ const filteredIssues = projectIssues.filter(issue => {
   const scheduleDate = new Date(issue.scheduleDate);
   const dateOfService = new Date(issue.dateOfService);
   return (
-      // Check if the current filter matches the issue's label or if "All Items" is selected
-      (currentFilter === 'All Items' ||
-       (currentFilter === 'Service Items' && issue.label === 'Service') ||
-       (currentFilter === 'T&M Items' && issue.label === 'T&M') ||
-       (currentFilter === 'Recommended Actions' && issue.label === 'Recommended Action')) &&
-      // Existing conditions for search and filtering
-      (!filters.searchText || issue.issueDescription.toLowerCase().includes(filters.searchText.toLowerCase())) &&
-      (!filters.priority || issue.priority === filters.priority) &&
-      (!filters.status || issue.status === filters.status) &&
-      (!filters.siteBuilding || issue.siteBuilding.toLowerCase().includes(filters.siteBuilding.toLowerCase())) &&
-      (!filters.requestedBy || issue.requestedBy.toLowerCase().includes(filters.requestedBy.toLowerCase())) &&
-      (!filters.createdDateStart || (createdDate && createdDate >= new Date(filters.createdDateStart))) &&
-      (!filters.createdDateEnd || (createdDate && createdDate <= new Date(filters.createdDateEnd))) &&
-      (!filters.scheduleDateStart || (scheduleDate && scheduleDate >= new Date(filters.scheduleDateStart))) &&
-      (!filters.scheduleDateEnd || (scheduleDate && scheduleDate <= new Date(filters.scheduleDateEnd))) &&
-      (!filters.dateOfServiceStart || (dateOfService && dateOfService >= new Date(filters.dateOfServiceStart))) &&
-      (!filters.dateOfServiceEnd || (dateOfService && dateOfService <= new Date(filters.dateOfServiceEnd))) &&
-      (!filters.engineer || issue.engineer.toLowerCase().includes(filters.engineer.toLowerCase())) &&
-      (!filters.activities || issue.activities.toLowerCase().includes(filters.activities.toLowerCase())) &&
-      (!filters.serviceType || issue.serviceType.toLowerCase().includes(filters.serviceType.toLowerCase())) &&
-      (!filters.hours || issue.hours.toString().toLowerCase().includes(filters.hours.toLowerCase()))
+    (currentFilter === 'All Items' ||
+     (currentFilter === 'Service Items' && issue.label === 'Service') ||
+     (currentFilter === 'T&M Items' && issue.label === 'T&M') ||
+     (currentFilter === 'Recommended Actions' && issue.label === 'Recommended Action')) &&
+    (!filters.searchText || issue.issueDescription.toLowerCase().includes(filters.searchText.toLowerCase())) &&
+    (!filters.priority || issue.priority === filters.priority) &&
+    (!filters.status || issue.status === filters.status) &&
+    (!filters.siteBuilding || issue.siteBuilding.toLowerCase().includes(filters.siteBuilding.toLowerCase())) &&
+    (!filters.requestedBy || issue.requestedBy.toLowerCase().includes(filters.requestedBy.toLowerCase())) &&
+    (!filters.createdDateStart || (createdDate && createdDate >= new Date(filters.createdDateStart))) &&
+    (!filters.createdDateEnd || (createdDate && createdDate <= new Date(filters.createdDateEnd))) &&
+    (!filters.label || issue.label === filters.label) &&
+    (!filters.scheduleDateStart || (scheduleDate && scheduleDate >= new Date(filters.scheduleDateStart))) &&
+    (!filters.scheduleDateEnd || (scheduleDate && scheduleDate <= new Date(filters.scheduleDateEnd))) &&
+    (!filters.dateOfServiceStart || (dateOfService && dateOfService >= new Date(filters.dateOfServiceStart))) &&
+    (!filters.dateOfServiceEnd || (dateOfService && dateOfService <= new Date(filters.dateOfServiceEnd))) &&
+    (!filters.engineer || issue.engineer.toLowerCase().includes(filters.engineer.toLowerCase())) &&
+    (!filters.activities || issue.activities.toLowerCase().includes(filters.activities.toLowerCase())) &&
+    (!filters.serviceType || issue.serviceType.toLowerCase().includes(filters.serviceType.toLowerCase())) &&
+    (!filters.hours || issue.hours.toString().toLowerCase().includes(filters.hours.toLowerCase()))
   );
 });
 
@@ -419,6 +419,7 @@ const handleFilterChange = (filter) => {
           <Tab className="custom-tab">Add/Edit Project</Tab>
           <Tab className="custom-tab">View Projects</Tab>
           <Tab className="custom-tab">Engineers</Tab>
+          <Tab className="custom-tab">KPI and Reports</Tab>
         </TabList>
 
 
@@ -484,7 +485,7 @@ const handleFilterChange = (filter) => {
             </>
           )}
           <h3>Service Requests</h3>
-          <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download Issues CSV</button>
+          <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download CSV</button>
           {/* Filter Bar */}
           <div className="filter-bar">
   <button className={showFilters ? "hide-filters-button" : "show-filters-button"}
@@ -760,7 +761,9 @@ const handleFilterChange = (filter) => {
     </form>
   </div>
 </TabPanel>
-
+<TabPanel>
+  <KpiComponent />
+</TabPanel>
 
 </Tabs>
 

@@ -81,6 +81,16 @@
       "name": "Ramon Rangel",
       "email": "ramon@triton-concepts.com",
       "id": 7
+    },
+    {
+      "name": " Katelyn Brewer",
+      "email": "katelyn@triton-concepts.com",
+      "id": 8
+    },
+    {
+      "name": " Vikram Kamma",
+      "email": "vikram@triton-concepts.com",
+      "id": 9
     }
   ],
   "issues": [
@@ -170,15 +180,15 @@
       "createdDate": "2024-04-10",
       "label": "T&M",
       "attachedFile": null,
-      "priority": "Medium",
+      "priority": "High",
       "status": "Resolved",
       "scheduleDate": "",
       "dateOfService": "",
-      "engineer": "Nikola Angelov",
+      "engineer": " Vikram Kamma",
       "activities": "",
       "serviceType": "Preventative Maintenance (Remote)",
       "hours": "4",
-      "lastUpdated": "2024-04-19T20:28:52.268Z",
+      "lastUpdated": "2024-04-22T15:36:43.449Z",
       "projectId": 2,
       "id": 5
     },
@@ -247,17 +257,17 @@
       "siteBuilding": "Building C",
       "requestedBy": "Todd",
       "createdDate": "2024-04-19",
-      "label": "T&M",
+      "label": "Service",
       "attachedFile": {},
       "priority": "High",
-      "status": "Open",
+      "status": "In Progress",
       "scheduleDate": "",
       "dateOfService": "",
-      "engineer": "",
+      "engineer": " Vikram Kamma",
       "activities": "",
-      "serviceType": "",
+      "serviceType": "Preventative Maintenance (Site)",
       "hours": "",
-      "lastUpdated": "4/19/2024, 12:42:42",
+      "lastUpdated": "4/22/2024, 08:17:46",
       "id": 13
     }
   ]
