@@ -36,12 +36,19 @@ const KpiComponent = () => {
   });
 
   const handleProjectSelect = (projectId) => {
+    if (!projectId) {
+      // If no project ID, clear the selected project details
+      setSelectedProject(null);
+      setTotalServiceHours(0); // Optionally reset other relevant state
+      return; // Stop further execution
+  }
     fetch(`http://localhost:3001/projects/${projectId}`)
       .then(response => response.json())
       .then(project => {
         setSelectedProject(project);
+        console.log('Selected Project:', project);  // Check if the state is updated
         fetchProjectIssues(projectId);
-      })
+    })
       .catch(error => console.error('Error fetching project details:', error));
   };
 
@@ -132,6 +139,11 @@ const KpiComponent = () => {
   const handleEngineerFilterChange = (engineerName) => {
     setFilters({ ...filters, engineer: engineerName });
   };
+  useEffect(() => {
+    if (selectedProject) {
+      fetchProjectIssues(selectedProject.id);
+    }
+  }, [selectedProject]);
 
   const getFilteredIssues = () => {
     const createdDateStart = filters.createdDateStart ? filters.createdDateStart.toISOString() : null;
