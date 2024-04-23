@@ -375,7 +375,7 @@ const KpiComponent = () => {
         <button className="filter-button" onClick={() => handleFilterChange('Recommended Actions')}>Recommended Actions</button>
       </div>
       <div>
-        <h2>Issue Report</h2>
+        
         <table className="issue-table">
           <thead>
             <tr>
