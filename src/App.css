@@ -17,14 +17,14 @@
 
 .app-logo {
   height: 70px; /* Adjust as needed */
-  margin-bottom: 10px; /* Space between logo and title */
+  margin-bottom: 3px; /* Space between logo and title */
 }
 
 .app-nav ul {
   display: flex;
   width: 100%; /* Ensure the ul spans the entire width of the nav */
   list-style: none; /* Remove default list styling */
-  padding: 0; /* Remove default padding */
+  padding: 5; /* Remove default padding */
   background-color: #2c2b2b; /* Adjust to match your navigation background */
   align-items: center;
 }
@@ -42,7 +42,7 @@
 }
 
 .app-nav li a:hover {
-  background-color: #111; /* Hover effect color */
+  background-color: #3264a5; /* Hover effect color */
 }
 
 .app-nav {
@@ -198,9 +198,9 @@ input {
 
 .custom-tab:hover,
 .custom-tab--selected {
-  background: #616570;
+  background: #3264a5;
   border-color: #747780;
-  color: black;
+  color: rgb(238, 231, 231);
   border-radius: 5px 5px 0 0;
 }
 

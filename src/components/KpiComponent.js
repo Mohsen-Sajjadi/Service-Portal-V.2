@@ -222,7 +222,7 @@ const KpiComponent = () => {
     <p className="project-info"><strong>Username:</strong> {selectedProject.username}</p>
   </div>
 )}
-        <h2>Issue Reports</h2>
+        <h2>Service Reports</h2>
       <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download CSV</button>
       {/* Filter Bar */}
       <div className="filter-bar">
