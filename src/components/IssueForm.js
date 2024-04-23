@@ -59,18 +59,49 @@ const IssueForm = forwardRef(({
     };
 
     const handleFileChange = (event) => {
-        setNewIssue({
-            ...newIssue,
-            attachedFile: event.target.files[0] ? event.target.files[0].name : null
+      const file = event.target.files[0];
+      setNewIssue({
+          ...newIssue,
+          attachedFile: file
+      });
+  };
+
+  const uploadFile = async () => {
+    const formData = new FormData();
+    formData.append('attachedFile', newIssue.attachedFile);
+    formData.append('projectId', projectId);
+    formData.append('issueId', issue ? issue.id : ''); // Issue Id for updating, if available
+
+    try {
+        const response = await fetch('http://localhost:3001/upload', {
+            method: 'POST',
+            body: formData,
         });
-    };
 
+        if (!response.ok) {
+            throw new Error('Failed to upload file');
+        }
 
-    const handleSubmit = (event) => {
+        const data = await response.json();
+        return data.filePath; // return the file path
+    } catch (error) {
+        console.error('Error uploading file:', error);
+        return null;
+    }
+};
+
+    const handleSubmit = async (event) => { // Mark this function as async
       event.preventDefault();
-  
+
+      // Upload file if attached
+      let filePath;
+      if (newIssue.attachedFile) {
+        filePath = await uploadFile(); // handle await properly
+      }
+
       const issueWithLastUpdated = {
         ...newIssue,
+        attachedFile: filePath,
         projectId: parseInt(newIssue.project, 10),
         lastUpdated: new Date().toISOString(),
       };
@@ -92,12 +123,10 @@ const IssueForm = forwardRef(({
         hideForm(); // Hide the form
         setNewIssue({}); // Reset the form state
         onIssueSubmitSuccess(); // Trigger any success actions
-
-        // Adjust this condition to match when you want the email to be sent
-  if (data.engineer) { // Removed the check for 'Assigned' status
-    sendEmailNotification(data);
-  }
-})
+        if (data.engineer) { // Condition to trigger email notification
+          sendEmailNotification(data);
+        }
+      })
       .catch(error => {
         console.error('Error:', error);
         // Here you could update the state to show the error to the user, e.g., setError(error.toString());
