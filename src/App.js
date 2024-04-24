@@ -34,7 +34,7 @@ function App() {
       <div className="app-container">
         <header className="app-header">
           <img src={logo} alt="Triton Logo" className="app-logo" />
-          <h1>Triton Concepts Service Portal</h1>
+          <h1>Service Portal</h1>
         </header>
         <nav className="app-nav">
           <ul>

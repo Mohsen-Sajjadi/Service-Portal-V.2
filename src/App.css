@@ -1,48 +1,51 @@
 /* General App Styling */
 .app-container {
-  font-family: 'Arial', sans-serif;
-  font-size: 20px; /* Increased text size for the container */
+  font-family: 'Roboto', 'Arial', sans-serif; 
+  font-size: 18px; 
+  color: #202124; 
 }
 
 .app-header {
   display: flex;
-  justify-content: center; /* Center children horizontally */
-  align-items: center; /* Center children vertically */
-  background-color: #172d47; /* Adjust the color to match your header */
+  justify-content: space-between; /* Align items with space in between */
+  align-items: center;
+  background-color: #132a49; 
   color: #ffffff;
-  padding: 20px;
-  text-align: center;
-  flex-direction: column; /* Stack children vertically */
+  padding: 24px;
+  font-size: 25px; /* Set font size */
+  font-family: Verdana, sans-serif, Helvetica, sans-serif; /* Set font type */
 }
 
 .app-logo {
-  height: 70px; /* Adjust as needed */
-  margin-bottom: 3px; /* Space between logo and title */
+  height: 70px; 
+  margin-bottom: 1px; 
 }
 
 .app-nav ul {
   display: flex;
-  width: 100%; /* Ensure the ul spans the entire width of the nav */
-  list-style: none; /* Remove default list styling */
-  padding: 5; /* Remove default padding */
-  background-color: #2c2b2b; /* Adjust to match your navigation background */
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  background-color: #2c2e3a; /* Light background for nav */
   align-items: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow under nav */
 }
 
 .app-nav li {
-  display: inline; /* Align list items in a line */
+  display: inline;
 }
 
 .app-nav li a {
   display: block;
-  color: white; /* Or another color based on your design */
+  color: #f5f6f7; 
   text-align: center;
-  padding: 16px 18px;
+  padding: 16px 20px;
   text-decoration: none;
+  border-radius: 4px; 
 }
 
 .app-nav li a:hover {
-  background-color: #3264a5; /* Hover effect color */
+  background-color: #345da5; 
 }
 
 .app-nav {
@@ -50,15 +53,19 @@
 }
 
 .login-button {
-  padding: 15px 30px; /* Adjust padding as needed */
-  background-color: #007bff; /* Example background color */
-  color: white; /* Text color */
-  border: none; /* Remove border */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
+  padding: 10px 25px;
+  background-color: #1a73e8; 
+  color: white;
+  border: none;
+  border-radius: 4px; 
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
 }
+
 .app-main {
-  padding: 20px;
+  padding: 24px;
+  background-color: #fff; 
+  border-top: 1px solid #eceff1; 
 }
 
 /* Form Styling */
@@ -69,7 +76,7 @@
 .form {
   background-color: #f2f2f2; /* Form background color */
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
 }
 
 .form label {
@@ -89,14 +96,10 @@
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 5px; /* Increased border radius for smoother edges */
+  border-radius: 10px; /* More rounded corners */
   box-sizing: border-box;
   transition: border-color 0.3s ease-in-out;
   font-size: 18px; /* Increased font size for better readability */
-}
-input {
-  font-size: 18px; /* Example size; adjust as needed */
-  /* Additional styling for inputs can go here */
 }
 
 .form input[type="text"]:focus,
@@ -114,7 +117,7 @@ input {
   padding: 16px 20px; /* Increased padding for larger buttons */
   margin: 8px 0;
   border: none;
-  border-radius: 5px; /* Increased border radius for smoother edges */
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   font-size: 16px; /* Increased font size for better readability */
@@ -127,47 +130,79 @@ input {
 /* Modern Table Styling */
 .issue-table {
   width: 100%;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 0;
   margin: 20px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
   overflow: hidden;
+  background: #ffffff;
 }
 
-.issue-table th, .issue-table td {
-  border-right: 1px solid #ddd;
-  padding: 12px 15px;
+.issue-table th,
+.issue-table td {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px 20px;
   text-align: left;
-  font-size: 18px;
+  font-size: 16px;
 }
 
-/* Header Styles */
 .issue-table th {
-  background-color: #556272; /* Darker shade for the header */
+  background-color: #556272;
+  background-image: linear-gradient(145deg, #556272, #6e7b8f);
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
 }
 
-/* Hover effect for rows */
 .issue-table tr:hover:not(:first-child) {
-  background-color: #f5f5f5;
+  background-color: #f0f0f0;
 }
 
-/* Removing the last border right from th and td */
-.issue-table th:last-child, .issue-table td:last-child {
+.issue-table th:last-child,
+.issue-table td:last-child {
   border-right: none;
 }
 
-/* Zebra Stripes for rows */
 .issue-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-/* Adjust font size and padding for td for better spacing and readability */
 .issue-table td {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333; /* General color for table cells */
 }
+
+.issue-table tr:not(:first-child):hover {
+  background-color: #e2e5e9;
+  transition: background-color 0.3s;
+}
+
+/* Increased Specificity for Status Colors */
+.issue-table td.status-open {
+  color: blue !important;
+}
+
+.issue-table td.status-in-progress {
+  color: orange !important;
+}
+
+.issue-table td.status-cancelled {
+  color: gray !important;
+}
+
+.issue-table td.status-resolved {
+  color: green !important;
+}
+
+/* Text Truncation */
+.truncate-text {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 /* Tab Styling (React Tabs) */
 .custom-tabs {
@@ -194,6 +229,7 @@ input {
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   font-size: 18px; /* Increased font size for better readability */
+  border-radius: 10px 10px 0 0; /* More rounded corners */
 }
 
 .custom-tab:hover,
@@ -201,7 +237,6 @@ input {
   background: #3264a5;
   border-color: #747780;
   color: rgb(238, 231, 231);
-  border-radius: 5px 5px 0 0;
 }
 
 .react-tabs__tab-panel {
@@ -249,7 +284,7 @@ option {
 button {
   padding: 10px 20px;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   border: none;
   cursor: pointer;
   transition: background-color 0.2s, box-shadow 0.2s;
@@ -317,7 +352,7 @@ button:not(:last-child) {
   width: calc(100% - 20px); /* Full width minus padding */
   padding: 10px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -341,7 +376,7 @@ button:not(:last-child) {
   background-color: #4A90E2; /* Match the focus color */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
@@ -356,7 +391,7 @@ button:not(:last-child) {
   width: 100%;
   padding: 14px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   box-sizing: border-box;
   transition: border-color 0.3s ease-in-out;
 }
@@ -374,7 +409,7 @@ button:not(:last-child) {
 }
 
 .form-field label {
-  display: block;
+  display:block;
   margin-bottom: 5px;
 }
 
@@ -383,7 +418,7 @@ button:not(:last-child) {
   color: white;
   padding: 14px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
@@ -396,7 +431,7 @@ button:not(:last-child) {
 .form-container {
   background: #ffffff;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px; /* More rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
@@ -418,7 +453,7 @@ button:not(:last-child) {
   padding: 10px;
   margin-bottom: 16px;
   border: 1px solid #ced4da;
-  border-radius: 4px;
+  border-radius: 10px; /* More rounded corners */
   font-size: 0.875rem;
 }
 
@@ -428,7 +463,7 @@ button:not(:last-child) {
   padding: 10px;
   margin-bottom: 16px;
   border: 1px solid #ced4da;
-  border-radius: 4px;
+  border-radius: 10px; /* More rounded corners */
   background-color: #fff;
   font-size: 0.875rem;
 }
@@ -445,7 +480,7 @@ button:not(:last-child) {
   color: white;
   padding: 10px 15px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   font-size: 0.875rem;
@@ -465,6 +500,7 @@ button:not(:last-child) {
   border-color: #80bdff;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
+
 /* Layout adjustments using Flexbox */
 .filter-bar, .button-container {
   display: flex;
@@ -473,22 +509,8 @@ button:not(:last-child) {
   align-items: center;
   margin-bottom: 2px;
 }
-/* Status Color Styles */
-.status-open {
-  color: blue; /* Representing 'Open' status */
-}
 
-.status-in-progress {
-  color: orange; /* Representing 'In Progress' status */
-}
 
-.status-cancelled {
-  color: gray; /* Representing 'Cancelled' status */
-}
-
-.status-resolved {
-  color: green; /* Representing 'Resolved' status */
-}
 /* Media query for responsive design */
 @media (max-width: 768px) {
   .project-details {
@@ -499,11 +521,12 @@ button:not(:last-child) {
     align-items: stretch;
   }
 }
+
 /* Filter Bar Styling */
 .filter-bar {
   background-color: #f8f9fa; /* Light gray background for the filter bar */
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   display: flex;
@@ -519,7 +542,7 @@ button:not(:last-child) {
   background-color: #3264a5; /* Bootstrap primary blue */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -533,7 +556,7 @@ button:not(:last-child) {
 .filter-bar select {
   padding: 8px;
   border: 1px solid #ced4da; /* Bootstrap's border color */
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   font-size: 1rem; /* Adjust font size as needed */
 }
 
@@ -611,52 +634,76 @@ button:not(:last-child) {
     overflow-x: auto; /* Allows horizontal scrolling if table is wider than screen */
   }
 }
+
 .truncate-text {
   max-width: 150px; /* Or whatever maximum width you prefer */
   white-space: nowrap; /* Prevents wrapping */
   overflow: hidden; /* Hides overflow */
   text-overflow: ellipsis; /* Adds ellipsis to truncated text */
 }
+
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7); /* Darker for better focus on modal */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1050;
+  backdrop-filter: blur(5px); /* Adds a blur effect to the background */
 }
 
 .modal-content {
-  background: white;
-  padding: 30px; /* Increased padding for larger internal space */
-  border-radius: 5px;
-  max-width: 800px; /* Increased max-width for a wider modal */
-  width: 80%; /* Adjusted for a larger default size, but still responsive */
-  min-width: 300px; /* Ensures modal doesn't get too small on narrow screens */
-  min-height: 200px; /* Ensures modal has a minimum height */
-  max-height: 90vh; /* Optional: limits modal height to 90% of the viewport height */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  overflow-y: auto; /* Keeps scrolling for excessive text */
+  background: #fff; /* Clean white background */
+  color: #333; /* Slightly darker text for better readability */
+  padding: 40px; /* More padding for a roomier feel */
+  border-radius: 12px; /* Updated border radius for softer edges */
+  max-width: 600px; /* Optimal width for readability */
+  width: 90%; /* Makes it responsive */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Softer shadow for a modern look */
+  overflow-y: auto; /* Allows content to scroll inside the modal */
+  animation: modal-in 0.3s; /* Smooth fade-in effect */
 }
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .project-card {
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #ccc; /* Lighter border for a cleaner look */
+  border-radius: 10px; /* Soft, rounded corners */
   padding: 20px;
   margin: 20px 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  background-color: #fbfbfd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly heavier shadow for more depth */
+  background-color: #fff; /* Pure white background for brightness */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  display: block;
+  position: relative; /* Ensures that it can use z-index */
+  z-index: 1; /* Higher z-index so it pops out like a modal */
 }
+
+.project-card:hover {
+  transform: translateY(-5px); /* Lifts card on hover for a dynamic effect */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover for more focus */
+}
+
 .project-title {
   font-size: 28px; /* Adjust the size as needed */
   color: #2E4053; /* Deep blue color for sophistication */
   text-align: left; /* Align the title to the left */
   margin-bottom: 20px; /* Add some space below the title */
   padding: 10px 0; /* Add some padding for a better look */
-  border-radius: 8px; /* Rounded corners for a modern look */
+  border-radius: 10px; /* Rounded corners for a modern look */
 }
 
 /* Project Details Styling - Modernized */
@@ -664,37 +711,42 @@ button:not(:last-child) {
   background: linear-gradient(145deg, #ffffff, #f0f0f0);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.4);
   margin-top: 25px;
   border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease; /* Smooth transitions for hover effects */
 }
 
+.project-details:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+  transform: translateY(-3px); /* Subtle lift effect on hover */
+}
 .project-details-title {
   color: #2a416f;
   margin-bottom: 20px;
-  font-size: 22px;
+  font-size: 24px; /* Slightly larger for more impact */
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px; /* Slightly increased for better spacing */
 }
 
 .project-detail {
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Increased space between details for better readability */
   font-size: 16px;
   color: #2a416f;
-  line-height: 1.5;
+  line-height: 1.6; /* Slightly more line spacing for readability */
 }
-
 .detail-label {
   font-weight: bold;
-  color: #334764;
+  color: #334764; /* Slightly darker for better contrast */
   display: inline-block;
-  min-width: 120px; /* Ensures alignment */
+  min-width: 140px; /* Increased min-width for better label alignment */
+  margin-right: 10px; /* Added right margin for clear separation from the detail text */
 }
 
-/* Enhance readability with more contrast for the labels */
 .detail-label:after {
   content: ':';
+  margin-left: 2px; /* Added space after the colon for better visual separation */
 }
 
 .download-csv-button {
@@ -702,7 +754,7 @@ button:not(:last-child) {
   color: white; /* White text */
   padding: 10px 15px; /* Padding around the text */
   border: none; /* No border */
-  border-radius: 4px; /* Rounded corners */
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   margin-top: 10px; /* Margin at the top */
   font-size: 18px; /* Text size */
@@ -711,13 +763,14 @@ button:not(:last-child) {
 .download-csv-button:hover {
   background-color: #131414; /* Darker green on hover */
 }
+
 /* Login Form Styling */
 form {
   max-width: 800px;
   margin: 50px 0 50px 50px; /* Adjust the margin to move the form to the left */
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   box-shadow: 0 2px 4px rgba(0,0,0,.2);
   background: #fff;
 }
@@ -737,7 +790,7 @@ input[type="password"] {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px; /* More rounded corners */
   box-sizing: border-box; /* Makes the input fields include padding in their total width */
 }
 
@@ -745,7 +798,7 @@ button[type="submit"] {
   width: 100%;
   padding: 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px; /* More rounded corners */
   background-color: #007bff;
   color: white;
   font-size: 16px;
@@ -756,6 +809,7 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #0056b3;
 }
+
 input[name="issueDescription"],
 input[name="siteBuilding"],
 input[name="requestedBy"],
@@ -772,6 +826,7 @@ input[name="serviceType"],
 input[name="hours"] {
   font-size: 20px; /* Set a larger font size */
 }
+
 .home-container {
   text-align: center;
   padding: 50px;
@@ -793,7 +848,7 @@ input[name="hours"] {
   background-color: #4A90E2; /* A vibrant color for the link */
   color: white;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   text-decoration: none;
   transition: background-color 0.3s;
 }
@@ -801,13 +856,14 @@ input[name="hours"] {
 .contact-link:hover {
   background-color: #357ABD; /* Darker shade for hover effect */
 }
+
 /* Filter Bar Button Styling */
 .filter-button {
   padding: 8px 16px;
   background-color: #3264a5; /* Bootstrap primary blue */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px; /* More rounded corners */
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -815,6 +871,7 @@ input[name="hours"] {
 .filter-button:hover {
   background-color: #1d314b; /* Darken button on hover */
 }
+
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -826,7 +883,7 @@ input[name="hours"] {
   padding: 8px; /* Provides padding inside the input for text */
   margin: 10px 0; /* Adds space above and below the input */
   border: 1px solid #ccc; /* Adds a light grey border around the input */
-  border-radius: 4px; /* Rounds the corners of the input field */
+  border-radius: 10px; /* More rounded corners */
   box-sizing: border-box; /* Ensures padding does not affect the overall dimensions */
 }
 
@@ -835,9 +892,11 @@ input[name="hours"] {
   border-color: #66afe9; /* Changes border color on focus for better visibility */
   box-shadow: 0 0 8px rgba(102, 175, 233, 0.6); /* Adds a subtle shadow around the input when focused */
 }
+
 .project-info {
   margin-bottom: 10px;
   font-size: 16px;
   color: #2a416f;
   line-height: 1.5;
 }
+

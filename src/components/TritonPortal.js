@@ -277,19 +277,25 @@ const TritonPortalComponent = () => {
   };
 
   const getStatusClassName = (status) => {
+    console.log("Received status:", status); // Logs the status received
     switch (status) {
-      case 'Open':
-        return 'status-open';
-      case 'In Progress':
-        return 'status-in-progress';
-      case 'Cancelled':
-        return 'status-cancelled';
-      case 'Resolved':
-        return 'status-resolved';
-      default:
-        return ''; // Default class if status is unrecognized
+        case 'Open':
+            console.log('Applying class: status-open');
+            return 'status-open';
+        case 'In Progress':
+            console.log('Applying class: status-in-progress');
+            return 'status-in-progress';
+        case 'Cancelled':
+            console.log('Applying class: status-cancelled');
+            return 'status-cancelled';
+        case 'Resolved':
+            console.log('Applying class: status-resolved');
+            return 'status-resolved';
+        default:
+            console.log('Applying default class');
+            return ''; // Default class if status is unrecognized
     }
-  };
+};
 
   const handleRemoveIssue = (issueId) => {
     const isConfirmed = window.confirm("Are you sure you want to remove this issue?");
@@ -490,7 +496,7 @@ const handleFilterChange = (filter) => {
 <TabPanel>
           <h2>View Projects</h2>
           <select onChange={handleSelectProject} value={selectedProjectId}>
-            <option value="">Select a project</option>
+            <option value="">Select a Project</option>
             {projects.map(proj => (
               <option key={proj.id} value={proj.id}>{proj.project}</option>
             ))}
