@@ -13,7 +13,7 @@
   color: #ffffff;
   padding: 24px;
   font-size: 25px; /* Set font size */
-  font-family: Verdana, sans-serif, Helvetica, sans-serif; /* Set font type */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set font family */
 }
 
 .app-logo {
@@ -202,7 +202,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 /* Tab Styling (React Tabs) */
 .custom-tabs {
