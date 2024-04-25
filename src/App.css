@@ -30,6 +30,9 @@
   align-items: center;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow under nav */
 }
+.logout-button {
+  margin-left: auto; /* This pushes the logout button to the right */
+}
 
 .app-nav li {
   display: inline;

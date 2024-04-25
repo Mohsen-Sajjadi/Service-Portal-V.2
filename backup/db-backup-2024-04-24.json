@@ -1,0 +1,397 @@
+{
+  "projects": [
+    {
+      "project": "TSN_301262_Scripps College - Svc Agreement 2024",
+      "client": "Scripps College",
+      "address": "1030 Columbia Avenue, Claremont, CA 91711",
+      "email": "mohsen.sajadi@gmail.com",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "totalServiceHoursIncluded": "200",
+      "username": "clientemail@example.com",
+      "id": 1
+    },
+    {
+      "project": "TSN_301265_Eurofins- Service Agreement 2024",
+      "client": "Eurofins Environment Testing Southwest, LLC",
+      "address": "421 South 9th Street, Baton Rouge, LA 70802",
+      "email": "isaac@triton-concepts.com",
+      "startDate": "2024-02-01",
+      "endDate": "2025-01-31",
+      "totalServiceHoursIncluded": "36",
+      "username": "clientemail@example.com",
+      "id": 2
+    },
+    {
+      "project": "TSN_301165_ULV- Service Agreement 2024-25",
+      "client": "Facility Services Partners c/o ULV",
+      "address": "421 South 9th Street, Baton Rouge, LA 70802",
+      "email": "clientemail@example.com",
+      "startDate": "2024-01-31",
+      "endDate": "2025-02-28",
+      "totalServiceHoursIncluded": "196",
+      "username": "clientemail@example.com",
+      "id": 3
+    },
+    {
+      "project": "TSN_301185_Huntington Hospital- Svc Agreement 2023-24",
+      "client": "Huntington Hospital",
+      "address": "133 N Altadena Dr #2, Pasadena, CA 91107",
+      "totalServiceHoursIncluded": "240",
+      "startDate": "2023-05-01",
+      "endDate": "2024-05-01",
+      "username": "Uclientemail@example.com",
+      "email": "Client@example.com",
+      "id": 4
+    },
+    {
+      "project": "TSN_301258_Torrey View- Service Agreement 2024",
+      "client": "Breakthrough Properties",
+      "address": "10590 W Ocean Air Dr, San Diego, CA 92130",
+      "email": "clientemail@example.com",
+      "startDate": "2023-10-01",
+      "endDate": "2024-09-30",
+      "username": "clientemail@example.com",
+      "id": 5
+    },
+    {
+      "project": "TSN_301195_LMU- Service Agreement 2023-24",
+      "client": "Loyola Marymount University",
+      "address": "1 Loyola Marymount University Dr, Los Angeles, CA 90045",
+      "email": "clientemail@example.com",
+      "startDate": "2023-06-01",
+      "endDate": "2023-05-31",
+      "username": "clientemail@example.com",
+      "id": 6
+    },
+    {
+      "project": "TSN_301198_Pomona College- Svc Agreement 2023-24",
+      "client": "Pomona College",
+      "address": "333 N College Way, Claremont, CA 91711",
+      "email": "clientemail@example.com",
+      "username": "clientemail@example.com",
+      "startDate": "2024-01-01",
+      "endDate": "2024-06-30",
+      "id": 7
+    },
+    {
+      "project": "TSN_301257_Dendreon- Service Agreement 2024",
+      "client": "Dendreon- Seal Beach Receiving Warehouse",
+      "address": "1700 Saturn Way, Seal Beach, CA 90740",
+      "email": "clientemail@example.com",
+      "username": "clientemail@example.com",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "id": 8
+    },
+    {
+      "project": "TSN_301172_Takeda - TO Service Agreement",
+      "client": "Baxalta US Inc.",
+      "address": "1700 Rancho Conejo Blvd, Thousand Oaks, CA 91320",
+      "email": "clientemail@example.com",
+      "username": "clientemail@example.com",
+      "startDate": "2023-04-01",
+      "endDate": "2024-03-31",
+      "id": 9
+    },
+    {
+      "username": "clientemail@example.com",
+      "email": "clientemail@example.com",
+      "project": "TSN_301247_MCH- Service Agreement 2023-24",
+      "client": "Mission Community Hospital",
+      "address": "14850 Roscoe Blvd, Panorama City, CA 91402",
+      "startDate": "2023-11-27",
+      "endDate": "2023-11-26",
+      "id": 10
+    },
+    {
+      "username": "clientemail@example.com",
+      "email": "clientemail@example.com",
+      "project": "TSN_301203_PPG- Service Agreement 2023-24",
+      "client": "PolyPeptide Laboratories Inc",
+      "address": "365 Maple Ave, Torrance, CA 90503",
+      "startDate": "2023-06-01",
+      "endDate": "2024-05-31",
+      "id": 11
+    }
+  ],
+  "users": [],
+  "engineers": [
+    {
+      "id": 1,
+      "name": "Mohsen Sajjadi",
+      "email": "mohsen@triton-concepts.com"
+    },
+    {
+      "id": 2,
+      "name": "Isaac Miramontes",
+      "email": "isaac@triton-concepts.com"
+    },
+    {
+      "name": "Nikola Angelov",
+      "email": "nikola@triton-concepts.com",
+      "id": 3
+    },
+    {
+      "name": " Mano Sundararaj",
+      "email": "mano@triton-concepts.com",
+      "id": 4
+    },
+    {
+      "name": "Fernando Alvarez",
+      "email": "fernando@triton-concepts.com",
+      "id": 5
+    },
+    {
+      "name": " Miguel Santoyo",
+      "email": "miguel@triton-concepts.com",
+      "id": 6
+    },
+    {
+      "name": "Ramon Rangel",
+      "email": "ramon@triton-concepts.com",
+      "id": 7
+    },
+    {
+      "name": " Katelyn Brewer",
+      "email": "katelyn@triton-concepts.com",
+      "id": 8
+    },
+    {
+      "name": " Vikram Kamma",
+      "email": "vikram@triton-concepts.com",
+      "id": 9
+    },
+    {
+      "name": "Benjamin Moreno",
+      "email": "benjamin@triton-concepts.com",
+      "id": 10
+    },
+    {
+      "name": "Jaime Aguirre",
+      "email": "jaime@triton-concepts.com",
+      "id": 11
+    },
+    {
+      "name": "Mario Rodriguez",
+      "email": "mario@triton-concepts.com",
+      "id": 12
+    },
+    {
+      "name": " Nicole Stimpson",
+      "email": "nicoles@triton-concepts.com",
+      "id": 13
+    },
+    {
+      "name": "Patrick Watters",
+      "email": "patrick@triton-concepts.com",
+      "id": 14
+    },
+    {
+      "name": "Ricardo Brito",
+      "email": "ricardo@triton-concepts.com",
+      "id": 15
+    },
+    {
+      "name": "Sean Baker",
+      "email": "sean@triton-concepts.com",
+      "id": 16
+    }
+  ],
+  "issues": [
+    {
+      "project": 1,
+      "issueDescription": "VAV 102 Comm Issue 1111",
+      "siteBuilding": "Building C",
+      "requestedBy": "Todd",
+      "createdDate": "2024-04-10",
+      "label": "Service",
+      "attachedFile": null,
+      "priority": "Low",
+      "status": "In Progress",
+      "scheduleDate": "2024-04-12",
+      "dateOfService": "",
+      "engineer": "Isaac Miramontes",
+      "activities": "",
+      "serviceType": "Preventative Maintenance (Site)",
+      "hours": "3",
+      "lastUpdated": "2024-04-17T21:25:14.350Z",
+      "projectId": 1,
+      "id": 1
+    },
+    {
+      "project": 1,
+      "issueDescription": "VAV 104 Comm Issue ",
+      "siteBuilding": "Building C",
+      "requestedBy": "Todd",
+      "createdDate": "2024-04-10",
+      "label": "Service",
+      "priority": "Medium",
+      "status": "Open",
+      "scheduleDate": "",
+      "dateOfService": "",
+      "engineer": "Mohsen Sajjadi",
+      "activities": "sssssssssss",
+      "serviceType": "",
+      "hours": "3",
+      "lastUpdated": "2024-04-24T16:59:47.697Z",
+      "projectId": 1,
+      "id": 2
+    },
+    {
+      "project": 2,
+      "issueDescription": "Chiller SP COMM issue ",
+      "siteBuilding": "Building D",
+      "requestedBy": "test",
+      "createdDate": "2024-04-10",
+      "label": "Service",
+      "attachedFile": null,
+      "priority": "High",
+      "status": "In Progress",
+      "scheduleDate": "2024-04-11",
+      "dateOfService": "",
+      "engineer": "Isaac Miramontes",
+      "activities": "",
+      "serviceType": "Preventative Maintenance (Site)",
+      "hours": "4",
+      "lastUpdated": "2024-04-16T15:08:19.836Z",
+      "projectId": 2,
+      "id": 3
+    },
+    {
+      "project": 2,
+      "issueDescription": "AHU FAN VFD Issue ",
+      "siteBuilding": "Building C",
+      "requestedBy": "Todd",
+      "createdDate": "2024-04-10",
+      "label": "Service",
+      "attachedFile": {},
+      "priority": "Medium",
+      "status": "Open",
+      "scheduleDate": "",
+      "dateOfService": "",
+      "engineer": "Fernando Alvarez",
+      "activities": "",
+      "serviceType": "",
+      "hours": "",
+      "lastUpdated": "4/23/2024, 07:59:33",
+      "id": 4
+    },
+    {
+      "project": 2,
+      "issueDescription": "Cooling Valve Actuator issue ",
+      "siteBuilding": "Building D",
+      "requestedBy": "Todd",
+      "createdDate": "2024-04-10",
+      "label": "T&M",
+      "attachedFile": null,
+      "priority": "High",
+      "status": "Resolved",
+      "scheduleDate": "",
+      "dateOfService": "",
+      "engineer": "Patrick Watters",
+      "activities": "",
+      "serviceType": "Preventative Maintenance (Remote)",
+      "hours": "4",
+      "lastUpdated": "2024-04-23T14:58:36.767Z",
+      "projectId": 2,
+      "id": 5
+    },
+    {
+      "project": 1,
+      "issueDescription": "FCU 102-2 Fan issue ",
+      "siteBuilding": "Building C",
+      "requestedBy": "Todd",
+      "createdDate": "2024-04-18",
+      "label": "T&M",
+      "priority": "Medium",
+      "status": "Resolved",
+      "scheduleDate": "",
+      "dateOfService": "",
+      "engineer": "Fernando Alvarez",
+      "activities": "",
+      "serviceType": "",
+      "hours": "",
+      "lastUpdated": "2024-04-24T16:59:58.605Z",
+      "projectId": 1,
+      "id": 6
+    },
+    {
+      "project": 3,
+      "issueDescription": "Vav 104 COMM issue ",
+      "siteBuilding": "Building D",
+      "requestedBy": "test2",
+      "createdDate": "2024-04-17",
+      "label": "Service",
+      "attachedFile": null,
+      "priority": "Medium",
+      "status": "Resolved",
+      "scheduleDate": "2024-04-17",
+      "dateOfService": "2024-04-19",
+      "engineer": "Fernando Alvarez",
+      "activities": "it hs been fixed",
+      "serviceType": "Preventative Maintenance (Remote)",
+      "hours": "2",
+      "lastUpdated": "2024-04-15T17:32:16.538Z",
+      "projectId": 3,
+      "id": 9
+    },
+    {
+      "project": 4,
+      "issueDescription": "AHU-02 OAD issue ",
+      "siteBuilding": "Building D",
+      "requestedBy": "test",
+      "createdDate": "2024-04-16",
+      "label": "Service",
+      "priority": "Low",
+      "status": "Open",
+      "scheduleDate": "",
+      "dateOfService": "",
+      "engineer": " Miguel Santoyo",
+      "activities": "",
+      "serviceType": "Emergency Maintenance (Site)",
+      "hours": "3",
+      "lastUpdated": "2024-04-24T15:10:35.116Z",
+      "projectId": 4,
+      "id": 12
+    },
+    {
+      "project": 1,
+      "issueDescription": "issue VAV01",
+      "siteBuilding": "Building C",
+      "requestedBy": "Todd",
+      "createdDate": "2024-04-23",
+      "label": "T&M",
+      "priority": "Medium",
+      "status": "In Progress",
+      "scheduleDate": "",
+      "dateOfService": "",
+      "engineer": "Isaac Miramontes",
+      "activities": "aaaaaaaaaaaa",
+      "serviceType": "Preventative Maintenance (Remote)",
+      "hours": "",
+      "lastUpdated": "2024-04-24T15:11:43.813Z",
+      "projectId": 1,
+      "id": 13
+    },
+    {
+      "project": 2,
+      "issueDescription": "VAV 101 sensor issue ",
+      "siteBuilding": "Building C",
+      "requestedBy": "Todd",
+      "createdDate": "2024-04-23",
+      "label": "T&M",
+      "priority": "High",
+      "status": "Resolved",
+      "scheduleDate": "2024-04-25",
+      "dateOfService": "2024-04-26",
+      "engineer": "Patrick Watters",
+      "activities": "Sensor has been changed ",
+      "serviceType": "Preventative Maintenance (Site)",
+      "hours": "2",
+      "lastUpdated": "2024-04-23T17:34:09.733Z",
+      "projectId": 2,
+      "id": 14
+    }
+  ]
+}

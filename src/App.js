@@ -7,15 +7,21 @@ import ClientPortal from './components/ClientPortal';
 import IssueDetails from './components/IssueDetails';
 import logo from './triton-logo.png';
 import './App.css';
-import RequireRole from './components/RequireRole'; 
+import RequireRole from './components/RequireRole';
+
+// Define the LogoutButton component
+const LogoutButton = () => {
+  const { logout } = useAuth0();
+
+  return (
+    <button onClick={() => logout({ returnTo: window.location.origin })}>
+      Log Out
+    </button>
+  );
+};
 
 function App() {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
-
-  const handleLogout = () => {
-    logout({ returnTo: window.location.origin });
-    window.location.reload();
-  };
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   const loginToClientPortal = () => {
     loginWithRedirect({
@@ -38,9 +44,10 @@ function App() {
         </header>
         <nav className="app-nav">
           <ul>
-            <li><Link to="/" onClick={handleLogout}>Home</Link></li>
+            <li><Link to="/">Home</Link></li>
             <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/client">Client Portal</Link></li>
             <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/triton">Triton Portal</Link></li>
+            {isAuthenticated && <li className="logout-button"><LogoutButton /></li>}
           </ul>
         </nav>
         <main className="app-main">
