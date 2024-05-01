@@ -391,25 +391,6 @@
       "hours": "2",
       "lastUpdated": "4/25/2024, 08:20:50",
       "id": 14
-    },
-    {
-      "project": 1,
-      "issueDescription": "VAV Box no Flow. Damper not responding",
-      "siteBuilding": "Pomona College - Studio Art",
-      "requestedBy": "test44",
-      "createdDate": "2024-04-26",
-      "label": "Service",
-      "priority": "High",
-      "status": "Open",
-      "scheduleDate": "2024-04-30",
-      "dateOfService": "2024-04-30",
-      "engineer": " Vikram Kamma",
-      "activities": "",
-      "serviceType": "Service Agreement Performance Meeting Activities",
-      "hours": "",
-      "lastUpdated": "2024-04-26T15:28:33.368Z",
-      "projectId": 1,
-      "id": 15
     }
   ]
 }

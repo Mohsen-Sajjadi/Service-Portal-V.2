@@ -247,7 +247,7 @@ const formatDateToLocal = (isoDateString) => {
           )}
 
 <h3>Service Requests</h3>
-<button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download Issues CSV</button>
+<button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download Table</button>
           {/* Filter Bar */}
           <div className="filter-bar">
   <button className={showFilters ? "hide-filters-button" : "show-filters-button"}

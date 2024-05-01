@@ -533,7 +533,7 @@ const handleFilterChange = (filter) => {
             </>
           )}
           <h3>Service Requests</h3>
-          <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download CSV</button>
+          <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download Table</button>
           {/* Filter Bar */}
           <div className="filter-bar">
   <button className={showFilters ? "hide-filters-button" : "show-filters-button"}
