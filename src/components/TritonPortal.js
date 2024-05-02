@@ -367,7 +367,7 @@ const handleDownloadIssuesCSV = () => {
   console.log(`Downloading CSV as: ${filename}`);
   
   // Assuming 'prepareIssuesForDownload' returns the correct format for your CSV
-  const preparedIssues = prepareIssuesForDownload(projectIssues); // Use 'projectIssues' if it holds the correct issues
+  const preparedIssues = prepareIssuesForDownload(filteredIssues); // Use 'projectIssues' if it holds the correct issues
   downloadCSV(preparedIssues, filename);
 };
 

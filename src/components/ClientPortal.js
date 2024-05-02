@@ -121,7 +121,7 @@ const prepareIssuesForDownload = (issues) => {
     const filename = `${projectName.replace(/ /g, '_')}_${dateStr}.csv`; // Create a filename with the project name and current date
     console.log(`Downloading CSV as: ${filename}`);
   
-    const preparedIssues = prepareIssuesForDownload(projectIssues); // Prepare issues for download, adding the project name
+    const preparedIssues = prepareIssuesForDownload(filteredIssues); // Prepare issues for download, adding the project name
     downloadCSV(preparedIssues, filename);
   };
   
