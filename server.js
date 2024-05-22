@@ -69,11 +69,17 @@ const checkRole = (role) => (req, res, next) => {
 // Intercept JSON Server's default routing and add custom route
 server.use((req, res, next) => {
   if (req.path === '/send-email' && req.method === 'POST') {
+    const { to, subject, text } = req.body;
+    if (!to || !subject || !text) {
+      res.status(400).send('Missing required fields');
+      return;
+    }
+
     const mailOptions = {
       from: process.env.SMTP_USER,
-      to: req.body.to,
-      subject: req.body.subject,
-      text: req.body.text
+      to,
+      subject,
+      text
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -102,8 +108,10 @@ server.post('/test-post', (req, res) => {
 // Use the JSON Server router
 server.use(router);
 
-// Specify the port to listen on
+// Specify the port to listen on and bind to 0.0.0.0
 const port = process.env.PORT || 3001;
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const host = '0.0.0.0';
+
+server.listen(port, host, () => {
+  console.log(`Server is running on http://${host}:${port}`);
 });

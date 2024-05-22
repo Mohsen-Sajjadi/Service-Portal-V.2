@@ -206,6 +206,7 @@
       "requestedBy": "Todd",
       "createdDate": "2024-04-10",
       "label": "Service",
+      "attachedFile": null,
       "priority": "Low",
       "status": "In Progress",
       "scheduleDate": "2024-04-12",
@@ -213,9 +214,8 @@
       "engineer": "Isaac Miramontes",
       "activities": "",
       "serviceType": "Preventative Maintenance (Site)",
-      "hours": "8",
-      "lastUpdated": "2024-05-17T15:20:59.240Z",
-      "projectId": 1,
+      "hours": "3",
+      "lastUpdated": "5/9/2024, 12:53:14",
       "id": 1
     },
     {
@@ -232,8 +232,8 @@
       "engineer": "Mohsen Sajjadi",
       "activities": "test test",
       "serviceType": "",
-      "hours": "8",
-      "lastUpdated": "2024-05-17T15:21:06.157Z",
+      "hours": "3",
+      "lastUpdated": "2024-05-15T20:39:08.541Z",
       "projectId": 1,
       "id": 2
     },
@@ -304,6 +304,7 @@
       "requestedBy": "Todd",
       "createdDate": "2024-04-18",
       "label": "Service",
+      "attachedFile": null,
       "priority": "Medium",
       "status": "Resolved",
       "scheduleDate": "",
@@ -311,8 +312,8 @@
       "engineer": "Fernando Alvarez",
       "activities": "",
       "serviceType": "",
-      "hours": "8",
-      "lastUpdated": "2024-05-17T15:21:14.889Z",
+      "hours": "",
+      "lastUpdated": "2024-05-15T21:53:58.578Z",
       "projectId": 1,
       "id": 6
     },
@@ -369,8 +370,8 @@
       "engineer": "Nikola Angelov",
       "activities": "testtesttesttesttest\n",
       "serviceType": "Preventative Maintenance (Remote)",
-      "hours": "8",
-      "lastUpdated": "2024-05-17T15:21:21.599Z",
+      "hours": "",
+      "lastUpdated": "2024-05-15T21:19:03.654Z",
       "projectId": 1,
       "id": 13
     },
@@ -407,29 +408,10 @@
       "engineer": " Vikram Kamma",
       "activities": "test1test2test3test3test2testtest",
       "serviceType": "Service Agreement Performance Meeting Activities",
-      "hours": "8",
-      "lastUpdated": "2024-05-17T15:21:25.775Z",
+      "hours": "",
+      "lastUpdated": "2024-05-15T21:15:17.255Z",
       "projectId": 1,
       "id": 15
-    },
-    {
-      "project": 1,
-      "issueDescription": "VAV 102 sensor issue ",
-      "siteBuilding": "Building C",
-      "requestedBy": "Todd",
-      "createdDate": "2024-05-22",
-      "label": "T&M",
-      "priority": "Medium",
-      "status": "In Progress",
-      "scheduleDate": "",
-      "dateOfService": "",
-      "engineer": "Isaac Miramontes",
-      "activities": "",
-      "serviceType": "",
-      "hours": "",
-      "lastUpdated": "2024-05-22T14:50:04.803Z",
-      "projectId": 1,
-      "id": 16
     }
   ]
 }
