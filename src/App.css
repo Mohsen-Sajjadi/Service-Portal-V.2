@@ -665,8 +665,9 @@ button:not(:last-child) {
   border-radius: 12px; /* Updated border radius for softer edges */
   max-width: 600px; /* Optimal width for readability */
   width: 90%; /* Makes it responsive */
+  max-height: 80vh; /* Set a max-height for the modal content */
+  overflow-y: auto; /* Enable vertical scrolling */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Softer shadow for a modern look */
-  overflow-y: auto; /* Allows content to scroll inside the modal */
   animation: modal-in 0.3s; /* Smooth fade-in effect */
 }
 
