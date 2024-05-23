@@ -3,6 +3,7 @@ import IssueModal from './IssueModal'; // Ensure this path is correct
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { downloadCSV } from '../utils';
+import '../App.css'; // Make sure to import your CSS for styling
 
 const KpiComponent = () => {
   const [issues, setIssues] = useState([]);
@@ -41,14 +42,14 @@ const KpiComponent = () => {
       setSelectedProject(null);
       setTotalServiceHours(0); // Optionally reset other relevant state
       return; // Stop further execution
-  }
+    }
     fetch(`http://localhost:3001/projects/${projectId}`)
       .then(response => response.json())
       .then(project => {
         setSelectedProject(project);
         console.log('Selected Project:', project);  // Check if the state is updated
         fetchProjectIssues(projectId);
-    })
+      })
       .catch(error => console.error('Error fetching project details:', error));
   };
 
@@ -83,6 +84,7 @@ const KpiComponent = () => {
       project: undefined,
     }));
   };
+
   const getStatusClassName = (status) => {
     switch (status) {
       case 'Open':
@@ -139,6 +141,7 @@ const KpiComponent = () => {
   const handleEngineerFilterChange = (engineerName) => {
     setFilters({ ...filters, engineer: engineerName });
   };
+
   useEffect(() => {
     if (selectedProject) {
       fetchProjectIssues(selectedProject.id);
@@ -208,7 +211,7 @@ const KpiComponent = () => {
   );
 
   return (
-    <div>
+    <div className="app-container">
       <h2>Project Reports</h2>
       <select
         value={selectedProject ? selectedProject.id : ''}
@@ -219,23 +222,24 @@ const KpiComponent = () => {
           <option key={project.id} value={project.id}>{project.project}</option>
         ))}
       </select>
-  
+
       {/* Display selected project details in card format only if a project is selected */}
       {selectedProject && selectedProject.id && (
-  <div className="project-details">
-    <h3 className="project-title">{selectedProject.project}</h3>
-    <p className="project-info"><strong>Client:</strong> {selectedProject.client}</p>
-    <p className="project-info"><strong>Address:</strong> {selectedProject.address}</p>
-    <p className="project-info"><strong>Email:</strong> {selectedProject.email}</p>
-    <p className="project-info"><strong>Start Date:</strong> {selectedProject.startDate}</p>
-    <p className="project-info"><strong>End Date:</strong> {selectedProject.endDate}</p>
-    <p className="project-info"><strong>Total Service Hours Included:</strong> {selectedProject.totalServiceHoursIncluded}</p>
-    <p className="project-info"><strong>Total Service Hours:</strong> {totalServiceHours.toFixed(2)}</p>
-    <p className="project-info"><strong>Username:</strong> {selectedProject.username}</p>
-  </div>
-)}
-        <h2>Service Reports</h2>
-      <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download CSV</button>
+        <div className="project-details">
+          <h3 className="project-title">{selectedProject.project}</h3>
+          <p className="project-info"><strong>Client:</strong> {selectedProject.client}</p>
+          <p className="project-info"><strong>Address:</strong> {selectedProject.address}</p>
+          <p className="project-info"><strong>Email:</strong> {selectedProject.email}</p>
+          <p className="project-info"><strong>Start Date:</strong> {selectedProject.startDate}</p>
+          <p className="project-info"><strong>End Date:</strong> {selectedProject.endDate}</p>
+          <p className="project-info"><strong>Total Service Hours Included:</strong> {selectedProject.totalServiceHoursIncluded}</p>
+          <p className="project-info"><strong>Total Service Hours:</strong> {totalServiceHours.toFixed(2)}</p>
+          <p className="project-info"><strong>Username:</strong> {selectedProject.username}</p>
+        </div>
+      )}
+
+      <h2>Service Reports</h2>
+      <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download Table</button>
       {/* Filter Bar */}
       <div className="filter-bar">
         <button className={showFilters ? "hide-filters-button" : "show-filters-button"} onClick={() => setShowFilters(!showFilters)}>
@@ -374,8 +378,7 @@ const KpiComponent = () => {
         <button className="filter-button" onClick={() => handleFilterChange('T&M Items')}>T&M Items</button>
         <button className="filter-button" onClick={() => handleFilterChange('Recommended Actions')}>Recommended Actions</button>
       </div>
-      <div>
-        
+      <div className="table-container">
         <table className="issue-table">
           <thead>
             <tr>
@@ -403,7 +406,7 @@ const KpiComponent = () => {
               <tr key={issue.id} onClick={() => handleRowClick(issue)}>
                 <td>{index + 1}</td>
                 <td>{getProjectName(issue.project)}</td>
-                <td>{issue.issueDescription}</td>
+                <td className="truncate-text">{issue.issueDescription}</td>
                 <td>{issue.siteBuilding}</td>
                 <td>{issue.requestedBy}</td>
                 <td>{new Date(issue.createdDate).toLocaleDateString()}</td>
@@ -413,7 +416,7 @@ const KpiComponent = () => {
                 <td>{new Date(issue.scheduleDate).toLocaleDateString()}</td>
                 <td>{new Date(issue.dateOfService).toLocaleDateString()}</td>
                 <td>{issue.engineer}</td>
-                <td>{issue.activities}</td>
+                <td className="truncate-text">{issue.activities}</td>
                 <td>{issue.serviceType}</td>
                 <td>{issue.hours}</td>
                 <td className={getStatusClassName(issue.status)}>{issue.status}</td>

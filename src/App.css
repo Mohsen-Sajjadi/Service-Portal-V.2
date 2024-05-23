@@ -205,6 +205,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.table-container {
+  overflow-x: auto;
+}
 
 /* Tab Styling (React Tabs) */
 .custom-tabs {
