@@ -90,7 +90,7 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
         };
         const method = issue ? 'PUT' : 'POST';
         const url = `http://localhost:3001/issues${issue ? `/${issue.id}` : ''}`;
-    
+
         fetch(url, {
             method: method,
             headers: {
@@ -110,7 +110,7 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
                 subject: `New Issue Created: ${newIssue.issueDescription.substring(0, 20)}...`,
                 text: `A new issue has been created with the following details:\n\nDescription: ${newIssue.issueDescription}\nPriority: ${newIssue.priority}\nStatus: ${newIssue.status}\n\nPlease check the portal for more details.`
             };
-    
+
             return fetch('http://localhost:3001/send-email', {
                 method: 'POST',
                 headers: {
@@ -281,7 +281,6 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
             </form>
         </div>
     );
-}
-);
+});
 
 export default IssueFormClient;

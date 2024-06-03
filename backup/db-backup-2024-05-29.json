@@ -457,16 +457,16 @@
       "requestedBy": "test",
       "createdDate": "2024-05-23",
       "label": "Service",
-      "attachedFile": {},
+      "attachedFile": null,
       "priority": "Low",
-      "status": "In Progress",
+      "status": "Open",
       "scheduleDate": "",
       "dateOfService": "",
-      "engineer": "Isaac Miramontes",
+      "engineer": "",
       "activities": "",
       "serviceType": "",
       "hours": "",
-      "lastUpdated": "6/3/2024, 08:38:48",
+      "lastUpdated": "5/23/2024, 10:15:25",
       "id": 18
     }
   ]

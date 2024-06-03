@@ -9,61 +9,61 @@ const IssueForm = forwardRef(({
   onIssueSubmitSuccess
 }, ref) => {
   const [newIssue, setNewIssue] = useState({
-        project: parseInt(projectId, 10), // Ensure projectId is treated as an integer
-        issueDescription: issue?.issueDescription || '',
-        siteBuilding: issue?.siteBuilding || '',
-        requestedBy: issue?.requestedBy || '',
-        createdDate: issue?.createdDate || '',
-        label: issue?.label || '',
-        attachedFile: issue?.attachedFile || null,
-        priority: issue?.priority || '',
-        status: issue?.status || '',
-        scheduleDate: issue?.scheduleDate || '',
-        dateOfService: issue?.dateOfService || '',
-        engineer: issue?.engineer || '',
-        activities: issue?.activities || '',
-        serviceType: issue?.serviceType || '',
-        hours: issue?.hours || '',
-        lastUpdated: issue?.lastUpdated || new Date().toISOString(), // Initialize with current date-time for new issues
+    project: parseInt(projectId, 10), // Ensure projectId is treated as an integer
+    issueDescription: issue?.issueDescription || '',
+    siteBuilding: issue?.siteBuilding || '',
+    requestedBy: issue?.requestedBy || '',
+    createdDate: issue?.createdDate || '',
+    label: issue?.label || '',
+    attachedFile: issue?.attachedFile || null,
+    priority: issue?.priority || '',
+    status: issue?.status || '',
+    scheduleDate: issue?.scheduleDate || '',
+    dateOfService: issue?.dateOfService || '',
+    engineer: issue?.engineer || '',
+    activities: issue?.activities || '',
+    serviceType: issue?.serviceType || '',
+    hours: issue?.hours || '',
+    lastUpdated: issue?.lastUpdated || new Date().toISOString(), // Initialize with current date-time for new issues
+  });
+
+  useEffect(() => {
+    // When issue prop changes, update form state
+    if (issue) {
+      setNewIssue(prev => ({
+        ...prev,
+        project: parseInt(projectId, 10), // Convert projectId to integer during update
+        issueDescription: issue.issueDescription,
+        siteBuilding: issue.siteBuilding,
+        requestedBy: issue.requestedBy,
+        createdDate: issue.createdDate,
+        label: issue.label,
+        attachedFile: issue.attachedFile,
+        priority: issue.priority,
+        status: issue.status,
+        scheduleDate: issue.scheduleDate,
+        dateOfService: issue.dateOfService,
+        engineer: issue.engineer || '',
+        activities: issue.activities,
+        serviceType: issue.serviceType,
+        hours: issue.hours,
+      }));
+    }
+  }, [issue, projectId]);
+
+  const handleInputChange = (event) => {
+    setNewIssue({
+      ...newIssue,
+      [event.target.name]: event.target.value
     });
+  };
 
-    useEffect(() => {
-        // When issue prop changes, update form state
-        if (issue) {
-          setNewIssue(prev => ({
-            ...prev,
-            project: parseInt(projectId, 10), // Convert projectId to integer during update
-            issueDescription: issue.issueDescription,
-            siteBuilding: issue.siteBuilding,
-            requestedBy: issue.requestedBy,
-            createdDate: issue.createdDate,
-            label: issue.label,
-            attachedFile: issue.attachedFile,
-            priority: issue.priority,
-            status: issue.status,
-            scheduleDate: issue.scheduleDate,
-            dateOfService: issue.dateOfService,
-            engineer: issue.engineer || '',
-            activities: issue.activities,
-            serviceType: issue.serviceType,
-            hours: issue.hours,
-          }));
-        }
-    }, [issue, projectId]);
-
-    const handleInputChange = (event) => {
-        setNewIssue({
-            ...newIssue,
-            [event.target.name]: event.target.value
-        });
-    };
-
-    const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      setNewIssue({
-          ...newIssue,
-          attachedFile: file
-      });
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setNewIssue({
+      ...newIssue,
+      attachedFile: file
+    });
   };
 
   const uploadFile = async () => {
@@ -73,102 +73,101 @@ const IssueForm = forwardRef(({
     formData.append('issueId', issue ? issue.id : ''); // Issue Id for updating, if available
 
     try {
-        const response = await fetch('http://localhost:3001/upload', {
-            method: 'POST',
-            body: formData,
-        });
+      const response = await fetch('http://localhost:3001/upload', {
+        method: 'POST',
+        body: formData,
+      });
 
-        if (!response.ok) {
-            throw new Error('Failed to upload file');
-        }
-
-        const data = await response.json();
-        return data.filePath; // return the file path
-    } catch (error) {
-        console.error('Error uploading file:', error);
-        return null;
-    }
-};
-
-    const handleSubmit = async (event) => { // Mark this function as async
-      event.preventDefault();
-
-      // Upload file if attached
-      let filePath;
-      if (newIssue.attachedFile) {
-        filePath = await uploadFile(); // handle await properly
+      if (!response.ok) {
+        throw new Error('Failed to upload file');
       }
 
-      const issueWithLastUpdated = {
-        ...newIssue,
-        attachedFile: filePath,
-        projectId: parseInt(newIssue.project, 10),
-        lastUpdated: new Date().toISOString(),
-      };
-  
-      // First, try to create/update the issue
-      fetch(`http://localhost:3001/issues${issue ? `/${issue.id}` : ''}`, {
-        method: issue ? 'PUT' : 'POST',
+      const data = await response.json();
+      return data.filePath; // return the file path
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      return null
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Upload file if attached
+    let filePath;
+    if (newIssue.attachedFile) {
+      filePath = await uploadFile(); // handle await properly
+    }
+
+    const issueWithLastUpdated = {
+      ...newIssue,
+      attachedFile: filePath,
+      projectId: parseInt(newIssue.project, 10),
+      lastUpdated: new Date().toISOString(),
+    };
+
+    // First, try to create/update the issue
+    fetch(`http://localhost:3001/issues${issue ? `/${issue.id}` : ''}`, {
+      method: issue ? 'PUT' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(issueWithLastUpdated),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(issue ? 'Failed to update issue' : 'Failed to create issue');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Issue saved successfully:', data);
+      hideForm(); // Hide the form
+      setNewIssue({}); // Reset the form state
+      onIssueSubmitSuccess(); // Trigger any success actions
+      if (data.engineer) { // Condition to trigger email notification
+        sendEmailNotification(data);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Here you could update the state to show the error to the user, e.g., setError(error.toString());
+    });
+  };
+
+  function sendEmailNotification(issue) {
+    console.log("Attempting to send email notification", issue);
+    const engineer = engineers.find(engineer => engineer.name === issue.engineer);
+    if (engineer && engineer.email) {
+      console.log(`Sending email to ${engineer.email}`);
+      fetch('http://localhost:3001/send-email', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(issueWithLastUpdated),
+        body: JSON.stringify({
+          to: engineer.email,
+          subject: `Assigned Issue: ${issue.issueDescription}`,
+          text: `You have been assigned an issue: ${issue.issueDescription} in project ${issue.projectName}. Please check your dashboard for more details.`
+        })
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(issue ? 'Failed to update issue' : 'Failed to create issue');
-        }
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
-        console.log('Issue saved successfully:', data);
-        hideForm(); // Hide the form
-        setNewIssue({}); // Reset the form state
-        onIssueSubmitSuccess(); // Trigger any success actions
-        if (data.engineer) { // Condition to trigger email notification
-          sendEmailNotification(data);
-        }
+        console.log('Email sent:', data);
       })
       .catch(error => {
-        console.error('Error:', error);
-        // Here you could update the state to show the error to the user, e.g., setError(error.toString());
+        console.error('Failed to send email:', error);
       });
-    };
-    
-    function sendEmailNotification(issue) {
-      console.log("Attempting to send email notification", issue);
-      const engineer = engineers.find(engineer => engineer.name === issue.engineer);
-      if (engineer && engineer.email) {
-          console.log(`Sending email to ${engineer.email}`);
-          fetch('http://localhost:3001/send-email', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                  to: engineer.email,
-                  subject: `Assigned Issue: ${issue.issueDescription}`,
-                  text: `You have been assigned an issue: ${issue.issueDescription} in project ${issue.projectName}. Please check your dashboard for more details.`
-              })
-          })
-          .then(response => response.json())
-          .then(data => {
-              console.log('Email sent:', data);
-          })
-          .catch(error => {
-              console.error('Failed to send email:', error);
-          });
-      } else {
-          console.error('Engineer email not found.');
-      }
+    } else {
+      console.error('Engineer email not found.');
+    }
   }
-  
-    const handleRemove = () => {
-      if (issue && window.confirm('Are you sure you want to delete this issue?')) {
-        onRemoveIssue(issue.id);
-      }
-    };
-    
-    
-    return (
-      <div ref={ref} className="form-container">
-        <form onSubmit={handleSubmit} className="issue-form">
+
+  const handleRemove = () => {
+    if (issue && window.confirm('Are you sure you want to delete this issue?')) {
+      onRemoveIssue(issue.id);
+    }
+  };
+
+  return (
+    <div ref={ref} className="form-container">
+      <form onSubmit={handleSubmit} className="issue-form">
         <div className="form-group">
           <label className="form-label">Issue Description:</label>
           <textarea
@@ -295,19 +294,19 @@ const IssueForm = forwardRef(({
         </div>
 
         <div className="form-group">
-        <label>Engineer:</label>
-        <select
-          name="engineer"
-          value={newIssue.engineer}  // Ensure this value is used
-          onChange={handleInputChange}
-          required
-        >
-          <option value="">Select Engineer...</option>
-          {engineers.map(engineer => (
-            <option key={engineer.id} value={engineer.name}>{engineer.name}</option>
-          ))}
-        </select>
-      </div>
+          <label>Engineer:</label>
+          <select
+            name="engineer"
+            value={newIssue.engineer}  // Ensure this value is used
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">Select Engineer...</option>
+            {engineers.map(engineer => (
+              <option key={engineer.id} value={engineer.name}>{engineer.name}</option>
+            ))}
+          </select>
+        </div>
 
         <div className="form-group">
           <label className="form-label">Activities:</label>
@@ -348,12 +347,10 @@ const IssueForm = forwardRef(({
         </div>
         <button className="submit-button" type="submit">{issue ? 'Update' : 'Submit'}</button>
         <button type="button" className="remove-button" onClick={handleRemove}> Remove
-          </button>
-        </form>
-      </div>
-    );
-}
-);
-
+        </button>
+      </form>
+    </div>
+  );
+});
 
 export default IssueForm;

@@ -457,7 +457,6 @@
       "requestedBy": "test",
       "createdDate": "2024-05-23",
       "label": "Service",
-      "attachedFile": {},
       "priority": "Low",
       "status": "In Progress",
       "scheduleDate": "",
@@ -466,7 +465,8 @@
       "activities": "",
       "serviceType": "",
       "hours": "",
-      "lastUpdated": "6/3/2024, 08:38:48",
+      "lastUpdated": "2024-05-31T20:21:58.177Z",
+      "projectId": 1,
       "id": 18
     }
   ]

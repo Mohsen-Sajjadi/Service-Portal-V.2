@@ -6,6 +6,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser'); // Import body-parser to parse JSON body in requests
 const { expressjwt: jwt } = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
+const multer = require('multer');
+const path = require('path');
 
 // Create a JSON Server instance
 const server = jsonServer.create();
@@ -66,6 +68,25 @@ const checkRole = (role) => (req, res, next) => {
   }
 };
 
+// Set up Multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Adjust the destination as needed
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+const upload = multer({ storage });
+
+// Define a route to handle file uploads
+server.post('/upload', upload.single('attachedFile'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+  res.json({ filePath: req.file.path });
+});
+
 // Intercept JSON Server's default routing and add custom route
 server.use((req, res, next) => {
   if (req.path === '/send-email' && req.method === 'POST') {
@@ -94,6 +115,10 @@ server.use((req, res, next) => {
   } else {
     next();
   }
+});
+
+server.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
 // Apply JWT Auth and role check middleware to secure the routes
