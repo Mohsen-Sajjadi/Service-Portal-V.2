@@ -402,7 +402,10 @@ const TritonPortalComponent = () => {
 
   // Function to handle row click to open the modal
   const handleRowClick = (issue) => {
-    setModalContent(issue);
+    setModalContent({
+      ...issue,
+      attachedFileUrl: issue.attachedFile ? `http://localhost:3001/${issue.attachedFile}` : null,
+    });
     setShowModal(true);
   };
 
@@ -417,7 +420,7 @@ const TritonPortalComponent = () => {
 
   return (
     <div className="app-container">
-      <h1>Triton Portal</h1>
+      <h1>Admin Portal</h1>
       <Tabs className="custom-tabs">
         <TabList className="custom-tab-list">
           <Tab className="custom-tab">Add/Edit Project</Tab>
@@ -739,7 +742,7 @@ const TritonPortalComponent = () => {
                   <td>{issue.requestedBy}</td>
                   <td>{issue.createdDate}</td>
                   <td>{issue.label}</td>
-                  <td>{issue.attachedFile ? issue.attachedFile.name : ''}</td>
+                  <td>{issue.attachedFile ? <a href={`http://localhost:3001/${issue.attachedFile}`} target="_blank" rel="noopener noreferrer">Download</a> : ''}</td>
                   <td>{issue.priority}</td>
                   <td>{issue.scheduleDate}</td>
                   <td>{issue.dateOfService}</td>

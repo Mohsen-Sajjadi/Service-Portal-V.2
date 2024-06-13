@@ -46,7 +46,7 @@ function App() {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/client">Client Portal</Link></li>
-            <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/triton">Triton Portal</Link></li>
+            <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/triton">Admin Portal</Link></li>
             {isAuthenticated && <li className="logout-button"><LogoutButton /></li>}
           </ul>
         </nav>

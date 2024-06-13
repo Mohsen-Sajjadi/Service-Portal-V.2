@@ -9,7 +9,7 @@ const Home = ({ isAuthenticated, loginToClientPortal, loginToTritonPortal }) => 
         {!isAuthenticated && (
           <>
             <button className="login-button" onClick={loginToClientPortal}>Login to Client Portal</button>
-            <button className="login-button" onClick={loginToTritonPortal}>Login to Triton Portal</button>
+            <button className="login-button" onClick={loginToTritonPortal}>Login to Admin Portal</button>
           </>
         )}
       </p>

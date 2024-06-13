@@ -140,7 +140,10 @@ const ClientPortalComponent = () => {
 
   const handleRowClick = (issue) => {
     console.log('Row clicked', issue);
-    setModalContent(issue);
+    setModalContent({
+      ...issue,
+      attachedFileUrl: issue.attachedFile ? `http://localhost:3001/${issue.attachedFile}` : null,
+    });
     setShowModal(true);
   };
 
@@ -437,7 +440,7 @@ const ClientPortalComponent = () => {
                   <td>{issue.requestedBy}</td>
                   <td>{issue.createdDate}</td>
                   <td>{issue.label}</td>
-                  <td>{issue.attachedFile ? issue.attachedFile.name : ''}</td>
+                  <td>{issue.attachedFile ? <a href={`http://localhost:3001/${issue.attachedFile}`} target="_blank" rel="noopener noreferrer">Download</a> : ''}</td>
                   <td>{issue.priority}</td>
                   <td>{issue.scheduleDate}</td>
                   <td>{issue.dateOfService}</td>

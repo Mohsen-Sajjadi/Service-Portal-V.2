@@ -450,25 +450,6 @@
       "lastUpdated": "2024-06-04T14:46:40.804Z",
       "projectId": 1,
       "id": 18
-    },
-    {
-      "project": 3,
-      "issueDescription": "ahu 6 cooling valve issue ",
-      "siteBuilding": "Building C",
-      "requestedBy": "Todd",
-      "createdDate": "2024-06-12",
-      "label": "Service",
-      "priority": "Medium",
-      "status": "In Progress",
-      "scheduleDate": "2024-06-14",
-      "dateOfService": "2024-06-14",
-      "engineer": "Isaac Miramontes",
-      "activities": "issue has been fixed ",
-      "serviceType": "Preventative Maintenance (Remote)",
-      "hours": "3",
-      "lastUpdated": "2024-06-12T22:08:39.105Z",
-      "projectId": 3,
-      "id": 19
     }
   ]
 }

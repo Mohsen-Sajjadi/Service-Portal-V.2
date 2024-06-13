@@ -137,25 +137,25 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
         const formData = new FormData();
         formData.append('attachedFile', newIssue.attachedFile);
         formData.append('projectId', projectId);
-        formData.append('issueId', issue ? issue.id : ''); // Issue Id for updating, if available
-
+        formData.append('issueId', issue ? issue.id : 'new');
+      
         try {
-            const response = await fetch('http://localhost:3001/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to upload file');
-            }
-
-            const data = await response.json();
-            return data.filePath; // return the file path
+          const response = await fetch('http://localhost:3001/upload', {
+            method: 'POST',
+            body: formData,
+          });
+      
+          if (!response.ok) {
+            throw new Error('Failed to upload file');
+          }
+      
+          const data = await response.json();
+          return data.filePath;
         } catch (error) {
-            console.error('Error uploading file:', error);
-            return null;
+          console.error('Error uploading file:', error);
+          return null;
         }
-    };
+      };
 
     const handleRemove = () => {
         if (issue && window.confirm('Are you sure you want to delete this issue?')) {
