@@ -515,7 +515,6 @@ button:not(:last-child) {
   margin-bottom: 2px;
 }
 
-
 /* Media query for responsive design */
 @media (max-width: 768px) {
   .project-details {
@@ -568,6 +567,7 @@ button:not(:last-child) {
 /* Filter Bar Date Picker Styling */
 .filter-bar .date-filter div {
   margin-right: 0; /* Remove the margin */
+  z-index: 9999; /* Ensures the date picker is on top of other elements */
 }
 
 /* Custom styles for react-datepicker */
@@ -905,4 +905,3 @@ input[name="hours"] {
   color: #2a416f;
   line-height: 1.5;
 }
-
