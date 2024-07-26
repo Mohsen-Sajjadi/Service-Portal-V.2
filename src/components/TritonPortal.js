@@ -534,7 +534,7 @@ const TritonPortalComponent = () => {
           <h3>Service Requests</h3>
           <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download Table</button>
           {/* Filter Bar */}
-          <div className="filter-bar">
+          <div className="filter-element">
             <button className={showFilters ? "hide-filters-button" : "show-filters-button"}
               onClick={() => setShowFilters(!showFilters)}>
               {showFilters ? "Hide Filters" : "Show Filters"}
@@ -628,12 +628,6 @@ const TritonPortalComponent = () => {
                   <option value="Emergency Maintenance (Remote)">Emergency Maintenance (Remote)</option>
                   <option value="Service Agreement Performance Meeting Activities">Service Agreement Performance Meeting Activities</option>
                 </select>
-                <input
-                  type="text"
-                  placeholder="Hours"
-                  value={filters.hours}
-                  onChange={e => setFilters({ ...filters, hours: e.target.value })}
-                />
                 {/* Date Filters */}
                 <div className="date-filter">
                   <div>

@@ -36,18 +36,29 @@ const KpiComponent = () => {
     projectName: '', // Added project name filter
   });
 
+  useEffect(() => {
+    fetch('http://localhost:3001/projects')
+      .then(res => res.json())
+      .then(setProjects);
+    fetch('http://localhost:3001/issues')
+      .then(res => res.json())
+      .then(setIssues);
+    fetch('http://localhost:3001/engineers')
+      .then(res => res.json())
+      .then(setEngineers);
+  }, []);
+
   const handleProjectSelect = (projectId) => {
     if (!projectId) {
-      // If no project ID, clear the selected project details
       setSelectedProject(null);
-      setTotalServiceHours(0); // Optionally reset other relevant state
-      return; // Stop further execution
+      setIssues([]); // Clear issues when no project is selected
+      setTotalServiceHours(0);
+      return;
     }
     fetch(`http://localhost:3001/projects/${projectId}`)
       .then(response => response.json())
       .then(project => {
         setSelectedProject(project);
-        console.log('Selected Project:', project);  // Check if the state is updated
         fetchProjectIssues(projectId);
       })
       .catch(error => console.error('Error fetching project details:', error));
@@ -57,12 +68,13 @@ const KpiComponent = () => {
     fetch(`http://localhost:3001/issues?project=${projectId}`)
       .then(response => response.json())
       .then(data => {
-        console.log('Issues fetched:', data); // Debugging
+        setIssues(data);
         const totalHours = data.reduce((acc, issue) => acc + (parseFloat(issue.hours) || 0), 0);
         setTotalServiceHours(totalHours);
       })
       .catch(error => {
         console.error('Error fetching project issues:', error);
+        setIssues([]); // Clear issues on error
         setTotalServiceHours(0); // Reset on error
       });
   };
@@ -80,7 +92,6 @@ const KpiComponent = () => {
       scheduleDate: formatDate(issue.scheduleDate),
       dateOfService: formatDate(issue.dateOfService),
       lastUpdated: formatDate(issue.lastUpdated),
-      // Remove unnecessary data
       project: undefined,
     }));
   };
@@ -99,18 +110,6 @@ const KpiComponent = () => {
         return ''; // Default class if status is unrecognized
     }
   };
-
-  useEffect(() => {
-    fetch('http://localhost:3001/projects')
-      .then(res => res.json())
-      .then(setProjects);
-    fetch('http://localhost:3001/issues')
-      .then(res => res.json())
-      .then(setIssues);
-    fetch('http://localhost:3001/engineers')
-      .then(res => res.json())
-      .then(setEngineers);
-  }, []);
 
   const handleDownloadIssuesCSV = () => {
     const filteredIssues = getFilteredIssues();
@@ -137,7 +136,6 @@ const KpiComponent = () => {
     setFilters({ ...filters, projectName: projectId });
   };
 
-  // Function to handle change in engineer filter
   const handleEngineerFilterChange = (engineerName) => {
     setFilters({ ...filters, engineer: engineerName });
   };
@@ -223,7 +221,6 @@ const KpiComponent = () => {
         ))}
       </select>
 
-      {/* Display selected project details in card format only if a project is selected */}
       {selectedProject && selectedProject.id && (
         <div className="project-details">
           <h3 className="project-title">{selectedProject.project}</h3>
@@ -240,8 +237,8 @@ const KpiComponent = () => {
 
       <h2>Service Reports</h2>
       <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download Table</button>
-      {/* Filter Bar */}
-      <div className="filter-bar">
+
+      <div className="filter-element">
         <button className={showFilters ? "hide-filters-button" : "show-filters-button"} onClick={() => setShowFilters(!showFilters)}>
           {showFilters ? "Hide Filters" : "Show Filters"}
         </button>
@@ -275,7 +272,6 @@ const KpiComponent = () => {
               value={filters.searchText}
               onChange={e => setFilters({ ...filters, searchText: e.target.value })}
             />
-            {/* Project Name Filter Dropdown */}
             <select
               value={filters.projectName}
               onChange={e => handleProjectFilterChange(e.target.value)}
@@ -351,13 +347,6 @@ const KpiComponent = () => {
               <option value="Emergency Maintenance (Remote)">Emergency Maintenance (Remote)</option>
               <option value="Service Agreement Performance Meeting Activities">Service Agreement Performance Meeting Activities</option>
             </select>
-            <input
-              type="text"
-              placeholder="Hours"
-              value={filters.hours}
-              onChange={e => setFilters({ ...filters, hours: e.target.value })}
-            />
-            {/* Date Filters */}
             <div className="date-filter">
               {renderDateFilters('Created Date', filters.createdDateStart, filters.createdDateEnd,
                 date => setFilters({ ...filters, createdDateStart: date }),
