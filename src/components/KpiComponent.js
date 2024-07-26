@@ -34,6 +34,9 @@ const KpiComponent = () => {
     serviceType: '',
     hours: '',
     projectName: '', // Added project name filter
+    createdDateRange: [null, null], // Initialize as array with nulls
+    scheduleDateRange: [null, null], // Initialize as array with nulls
+    dateOfServiceRange: [null, null], // Initialize as array with nulls
   });
 
   useEffect(() => {
@@ -185,29 +188,6 @@ const KpiComponent = () => {
     });
   };
 
-  const renderDateFilters = (label, startValue, endValue, onChangeStart, onChangeEnd) => (
-    <div>
-      <label>{label}:</label>
-      <DatePicker
-        selected={startValue}
-        onChange={onChangeStart}
-        selectsStart
-        startDate={startValue}
-        endDate={endValue}
-        dateFormat="yyyy-MM-dd"
-      />
-      <DatePicker
-        selected={endValue}
-        onChange={onChangeEnd}
-        selectsEnd
-        startDate={startValue}
-        endDate={endValue}
-        minDate={startValue}
-        dateFormat="yyyy-MM-dd"
-      />
-    </div>
-  );
-
   return (
     <div className="app-container">
       <h2>Project Reports</h2>
@@ -263,6 +243,9 @@ const KpiComponent = () => {
               serviceType: '',
               hours: '',
               projectName: '', // Reset projectName filter
+              createdDateRange: [null, null], // Reset date ranges
+              scheduleDateRange: [null, null], // Reset date ranges
+              dateOfServiceRange: [null, null], // Reset date ranges
             })}>
               Reset Filters
             </button>
@@ -348,15 +331,39 @@ const KpiComponent = () => {
               <option value="Service Agreement Performance Meeting Activities">Service Agreement Performance Meeting Activities</option>
             </select>
             <div className="date-filter">
-              {renderDateFilters('Created Date', filters.createdDateStart, filters.createdDateEnd,
-                date => setFilters({ ...filters, createdDateStart: date }),
-                date => setFilters({ ...filters, createdDateEnd: date }))}
-              {renderDateFilters('Schedule Date', filters.scheduleDateStart, filters.scheduleDateEnd,
-                date => setFilters({ ...filters, scheduleDateStart: date }),
-                date => setFilters({ ...filters, scheduleDateEnd: date }))}
-              {renderDateFilters('Date of Service', filters.dateOfServiceStart, filters.dateOfServiceEnd,
-                date => setFilters({ ...filters, dateOfServiceStart: date }),
-                date => setFilters({ ...filters, dateOfServiceEnd: date }))}
+              <div>
+                <label>Created Date:</label>
+                <DatePicker
+                  selected={filters.createdDateRange[0]}
+                  onChange={date => setFilters({ ...filters, createdDateRange: date })}
+                  startDate={filters.createdDateRange[0]}
+                  endDate={filters.createdDateRange[1]}
+                  selectsRange
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <div>
+                <label>Schedule Date:</label>
+                <DatePicker
+                  selected={filters.scheduleDateRange[0]}
+                  onChange={date => setFilters({ ...filters, scheduleDateRange: date })}
+                  startDate={filters.scheduleDateRange[0]}
+                  endDate={filters.scheduleDateRange[1]}
+                  selectsRange
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <div>
+                <label>Date of Service:</label>
+                <DatePicker
+                  selected={filters.dateOfServiceRange[0]}
+                  onChange={date => setFilters({ ...filters, dateOfServiceRange: date })}
+                  startDate={filters.dateOfServiceRange[0]}
+                  endDate={filters.dateOfServiceRange[1]}
+                  selectsRange
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
             </div>
           </>
         )}
