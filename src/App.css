@@ -1,8 +1,20 @@
 /* General App Styling */
-.app-container {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Roboto', 'Arial', sans-serif;
   font-size: 18px;
   color: #202124;
+  line-height: 1.5;
+}
+
+.app-container {
+  padding: 24px;
+  background-color: #f9f9f9;
 }
 
 .app-header {
@@ -69,25 +81,35 @@
 }
 
 /* Form Styling */
-.form-container {
+.form-container,
+.issue-form-container,
+.issue-form-client-container {
   margin: 20px 0;
   background: #ffffff;
-  padding: 20px;
+  padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
 }
 
-.form {
-  background-color: #f2f2f2;
-  padding: 20px;
+.form,
+.issue-form,
+.issue-form-client {
+  background-color: #f7f7f7;
+  padding: 25px;
   border-radius: 10px;
 }
 
-.form label {
+.form label,
+.form .form-label,
+.issue-form label,
+.issue-form .form-label,
+.issue-form-client label,
+.issue-form-client .form-label {
   margin-bottom: 10px;
   display: block;
   font-weight: bold;
+  color: #333;
+  font-size: 18px;
 }
 
 .form input[type="text"],
@@ -99,14 +121,28 @@
 .form select,
 .form-field input,
 .form-field select,
-.form-field textarea {
+.form-field textarea,
+.issue-form input[type="text"],
+.issue-form input[type="date"],
+.issue-form input[type="email"],
+.issue-form input[type="password"],
+.issue-form input[type="number"],
+.issue-form textarea,
+.issue-form select,
+.issue-form-client input[type="text"],
+.issue-form-client input[type="date"],
+.issue-form-client input[type="email"],
+.issue-form-client input[type="password"],
+.issue-form-client input[type="number"],
+.issue-form-client textarea,
+.issue-form-client select {
   width: 100%;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 16px;
+  margin: 10px 0;
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-sizing: border-box;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  background-color: #f9f9f9;
   transition: border-color 0.3s ease-in-out;
   font-size: 18px;
 }
@@ -116,37 +152,75 @@
 .form select:focus,
 .form-field input:focus,
 .form-field select:focus,
-.form-field textarea:focus {
-  border-color: #45a049;
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+.form-field textarea:focus,
+.issue-form input:focus,
+.issue-form textarea:focus,
+.issue-form select:focus,
+.issue-form-client input:focus,
+.issue-form-client textarea:focus,
+.issue-form-client select:focus {
   outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
 }
 
 .form button,
-.form-field button {
+.form-field button,
+.issue-form button,
+.issue-form-client button {
   width: 100%;
-  background-color: #354974;
+  background-color: #1a73e8;
   color: white;
-  padding: 16px 20px;
+  padding: 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
   font-size: 16px;
+  margin-top: 10px;
 }
 
 .form button:hover,
-.form-field button:hover {
-  background-color: #45a049;
+.form-field button:hover,
+.issue-form button:hover,
+.issue-form-client button:hover {
+  background-color: #1661c1;
 }
 
+.submit-button {
+  background-color: #1a73e8;
+}
+
+.submit-button:hover {
+  background-color: #1661c1;
+}
+
+.remove-button {
+  background-color: #d9534f;
+  margin-top: 8px;
+}
+
+.remove-button:hover {
+  background-color: #c9302c;
+}
+
+.cancel-button {
+  background-color: #f0ad4e;
+  margin-top: 8px;
+}
+
+.cancel-button:hover {
+  background-color: #ec971f;
+}
+
+/* Dropdown and Select Styling */
 select {
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border-radius: 0.5rem;
+  padding: 12px 16px;
+  margin-top: 10px;
+  border-radius: 10px;
   border: 1px solid #ced4da;
   background-color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 18px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -399,7 +473,7 @@ button:not(:last-child) {
   justify-content: center;
   align-items: center;
   z-index: 1050;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
 }
 
 .modal-content {
@@ -533,11 +607,12 @@ button:not(:last-child) {
 /* Engineer Form Container Styling */
 .engineer-form-container .form-group input {
   width: 100%;
-  padding: 8px;
+  padding: 16px; /* Increased padding */
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-sizing: border-box;
+  font-size: 18px; /* Increased font size */
 }
 
 .engineer-form-container .form-group input:focus {
@@ -552,4 +627,3 @@ button:not(:last-child) {
   color: #2a416f;
   line-height: 1.5;
 }
-
