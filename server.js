@@ -58,6 +58,14 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+transporter.verify((error, success) => {
+  if (error) {
+    console.error('SMTP Connection Error:', error);
+  } else {
+    console.log('SMTP Server is ready to take our messages:', success);
+  }
+});
+
 // Role-based access control (RBAC) middleware
 const checkRole = (role) => (req, res, next) => {
   const roles = req.user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || [];

@@ -15,7 +15,6 @@ const ClientPortalComponent = () => {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({});
-  const [showFilters, setShowFilters] = useState(false);
   const [currentFilter, setCurrentFilter] = useState('All Items');
   const issueFormRef = useRef(null);
   const [filters, setFilters] = useState({
@@ -25,10 +24,10 @@ const ClientPortalComponent = () => {
     issueDescription: '',
     siteBuilding: '',
     requestedBy: '',
-    createdDate: '',
+    createdDateRange: [null, null],
     label: '',
-    scheduleDate: '',
-    dateOfService: '',
+    scheduleDateRange: [null, null],
+    dateOfServiceRange: [null, null],
     engineer: '',
     activities: '',
     serviceType: '',
@@ -116,12 +115,12 @@ const ClientPortalComponent = () => {
       (!filters.label || issue.label === filters.label) &&
       (!filters.siteBuilding || issue.siteBuilding.toLowerCase().includes(filters.siteBuilding.toLowerCase())) &&
       (!filters.requestedBy || issue.requestedBy.toLowerCase().includes(filters.requestedBy.toLowerCase())) &&
-      (!filters.createdDateStart || (createdDate && createdDate >= new Date(filters.createdDateStart))) &&
-      (!filters.createdDateEnd || (createdDate && createdDate <= new Date(filters.createdDateEnd))) &&
-      (!filters.scheduleDateStart || (scheduleDate && scheduleDate >= new Date(filters.scheduleDateStart))) &&
-      (!filters.scheduleDateEnd || (scheduleDate && scheduleDate <= new Date(filters.scheduleDateEnd))) &&
-      (!filters.dateOfServiceStart || (dateOfService && dateOfService >= new Date(filters.dateOfServiceStart))) &&
-      (!filters.dateOfServiceEnd || (dateOfService && dateOfService <= new Date(filters.dateOfServiceEnd))) &&
+      (!filters.createdDateRange[0] || (createdDate && createdDate >= filters.createdDateRange[0])) &&
+      (!filters.createdDateRange[1] || (createdDate && createdDate <= filters.createdDateRange[1])) &&
+      (!filters.scheduleDateRange[0] || (scheduleDate && scheduleDate >= filters.scheduleDateRange[0])) &&
+      (!filters.scheduleDateRange[1] || (scheduleDate && scheduleDate <= filters.scheduleDateRange[1])) &&
+      (!filters.dateOfServiceRange[0] || (dateOfService && dateOfService >= filters.dateOfServiceRange[0])) &&
+      (!filters.dateOfServiceRange[1] || (dateOfService && dateOfService <= filters.dateOfServiceRange[1])) &&
       (!filters.engineer || issue.engineer.toLowerCase().includes(filters.engineer.toLowerCase())) &&
       (!filters.activities || issue.activities.toLowerCase().includes(filters.activities.toLowerCase())) &&
       (!filters.serviceType || issue.serviceType.toLowerCase().includes(filters.serviceType.toLowerCase())) &&
@@ -148,6 +147,24 @@ const ClientPortalComponent = () => {
   };
 
   const handleFilterChange = (filter) => {
+    if (filter === 'All Items') {
+      setFilters({
+        searchText: '',
+        priority: '',
+        status: '',
+        issueDescription: '',
+        siteBuilding: '',
+        requestedBy: '',
+        createdDateRange: [null, null],
+        label: '',
+        scheduleDateRange: [null, null],
+        dateOfServiceRange: [null, null],
+        engineer: '',
+        activities: '',
+        serviceType: '',
+        hours: '',
+      });
+    }
     setCurrentFilter(filter);
   };
 
@@ -209,7 +226,7 @@ const ClientPortalComponent = () => {
         <p>Loading...</p>
       ) : (
         <div className="project-card">
-          <h1 className="project-title">Project Name: {project.project}</h1>
+          <h1 className="project-title"> {project.project}</h1>
           <p className="project-detail"><span className="detail-label">Client Name:</span> {project.client}</p>
           <p className="project-detail"><span className="detail-label">Email:</span> {project.email}</p>
           <p className="project-detail"><span className="detail-label">Start Date:</span> {project.startDate}</p>
@@ -234,179 +251,45 @@ const ClientPortalComponent = () => {
           <h3>Service Requests</h3>
           <button className="download-csv-button" onClick={handleDownloadIssuesCSV}>Download Table</button>
 
-          <div className="filter-bar">
-            <button className={showFilters ? "hide-filters-button" : "show-filters-button"}
-              onClick={() => setShowFilters(!showFilters)}>
-              {showFilters ? "Hide Filters" : "Show Filters"}
-            </button>
-            {showFilters && (
-              <>
-                <button onClick={() => setFilters({
-                  searchText: '',
-                  priority: '',
-                  status: '',
-                  issueDescription: '',
-                  siteBuilding: '',
-                  requestedBy: '',
-                  createdDateStart: '',
-                  createdDateEnd: '',
-                  label: '',
-                  scheduleDateStart:'',
-                  scheduleDateEnd: '',
-                  dateOfServiceStart: '',
-                  dateOfServiceEnd: '',
-                  engineer: '',
-                  activities: '',
-                  serviceType: '',
-                  hours: '',
-                })}>
-                  Reset Filters
-                </button>
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  value={filters.searchText}
-                  onChange={e => setFilters({ ...filters, searchText: e.target.value })}
-                />
-                <select
-                  value={filters.priority}
-                  onChange={e => setFilters({ ...filters, priority: e.target.value })}
-                >
-                  <option value="">All Priorities</option>
-                  <option value="High">High</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Low">Low</option>
-                </select>
-                <select
-                  value={filters.status}
-                  onChange={e => setFilters({ ...filters, status: e.target.value })}
-                >
-                  <option value="">All Statuses</option>
-                  <option value="Open">Open</option>
-                  <option value="In Progress">In Progress</option>
-                  <option value="Cancelled">Cancelled</option>
-                  <option value="Resolved">Resolved</option>
-                </select>
-                <input
-                  type="text"
-                  placeholder="Issue Description"
-                  value={filters.issueDescription}
-                  onChange={e => setFilters({ ...filters, issueDescription: e.target.value })}
-                />
-                <input
-                  type="text"
-                  placeholder="Site / Building"
-                  value={filters.siteBuilding}
-                  onChange={e => setFilters({ ...filters, siteBuilding: e.target.value })}
-                />
-                <input
-                  type="text"
-                  placeholder="Requested By"
-                  value={filters.requestedBy}
-                  onChange={e => setFilters({ ...filters, requestedBy: e.target.value })}
-                />
-                <select
-                  value={filters.label}
-                  onChange={e => setFilters({ ...filters, label: e.target.value })}
-                >
-                  <option value="">All Labels</option>
-                  <option value="Service">Service</option>
-                  <option value="T&M">T&M</option>
-                </select>
-                <input
-                  type="text"
-                  placeholder="Engineer"
-                  value={filters.engineer}
-                  onChange={e => setFilters({ ...filters, engineer: e.target.value })}
-                />
-                <select
-                  value={filters.serviceType}
-                  onChange={e => setFilters({ ...filters, serviceType: e.target.value })}
-                >
-                  <option value="">All Service Types</option>
-                  <option value="Preventative Maintenance (Site)">Preventative Maintenance (Site)</option>
-                  <option value="Preventative Maintenance (Remote)">Preventative Maintenance (Remote)</option>
-                  <option value="Emergency Maintenance (Site)">Emergency Maintenance (Site)</option>
-                  <option value="Emergency Maintenance (Remote)">Emergency Maintenance (Remote)</option>
-                  <option value="Service Agreement Performance Meeting Activities">Service Agreement Performance Meeting Activities</option>
-                </select>
-                <input
-                  type="text"
-                  placeholder="Hours"
-                  value={filters.hours}
-                  onChange={e => setFilters({ ...filters, hours: e.target.value })}
-                />
-                <div className="date-filter">
-                  <div>
-                    <label>Created Date:</label>
-                    <DatePicker
-                      selected={filters.createdDateStart}
-                      onChange={date => setFilters({ ...filters, createdDateStart: date })}
-                      selectsStart
-                      startDate={filters.createdDateStart}
-                      endDate={filters.createdDateEnd}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                    <DatePicker
-                      selected={filters.createdDateEnd}
-                      onChange={date => setFilters({ ...filters, createdDateEnd: date })}
-                      selectsEnd
-                      startDate={filters.createdDateStart}
-                      endDate={filters.createdDateEnd}
-                      minDate={filters.createdDateStart}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                  </div>
-                  <div>
-                    <label>Schedule Date:</label>
-                    <DatePicker
-                      selected={filters.scheduleDateStart}
-                      onChange={date => setFilters({ ...filters, scheduleDateStart: date })}
-                      selectsStart
-                      startDate={filters.scheduleDateStart}
-                      endDate={filters.scheduleDateEnd}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                    <DatePicker
-                      selected={filters.scheduleDateEnd}
-                      onChange={date => setFilters({ ...filters, scheduleDateEnd: date })}
-                      selectsEnd
-                      startDate={filters.scheduleDateStart}
-                      endDate={filters.scheduleDateEnd}
-                      minDate={filters.scheduleDateStart}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                  </div>
-                  <div>
-                    <label>Date of Service:</label>
-                    <DatePicker
-                      selected={filters.dateOfServiceStart}
-                      onChange={date => setFilters({ ...filters, dateOfServiceStart: date })}
-                      selectsStart
-                      startDate={filters.dateOfServiceStart}
-                      endDate={filters.dateOfServiceEnd}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                    <DatePicker
-                      selected={filters.dateOfServiceEnd}
-                      onChange={date => setFilters({ ...filters, dateOfServiceEnd: date })}
-                      selectsEnd
-                      startDate={filters.dateOfServiceStart}
-                      endDate={filters.dateOfServiceEnd}
-                      minDate={filters.dateOfServiceStart}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-
           <div className="filter-tabs">
-            <button className="filter-button" onClick={() => handleFilterChange('All Items')}>All Items</button>
-            <button className="filter-button" onClick={() => handleFilterChange('Service Items')}>Service Items</button>
-            <button className="filter-button" onClick={() => handleFilterChange('T&M Items')}>T&M Items</button>
-            <button className="filter-button" onClick={() => handleFilterChange('Recommended Actions')}>Recommended Actions</button>
+            <button className="filter-button filter-element" onClick={() => handleFilterChange('All Items')}>All Items</button>
+            <button className="filter-button filter-element" onClick={() => handleFilterChange('Service Items')}>Service Items</button>
+            <button className="filter-button filter-element" onClick={() => handleFilterChange('T&M Items')}>T&M Items</button>
+            <button className="filter-button filter-element" onClick={() => handleFilterChange('Recommended Actions')}>Recommended Actions</button>
+            <div className="filter-element">
+              <select
+                value={filters.status}
+                onChange={e => setFilters({ ...filters, status: e.target.value })}
+              >
+                <option value="">All Statuses</option>
+                <option value="Open">Open</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Resolved">Resolved</option>
+              </select>
+            </div>
+            <div className="filter-element date-picker">
+              <label>Created Date:</label>
+              <DatePicker
+                selected={filters.createdDateRange[0]}
+                onChange={date => setFilters({ ...filters, createdDateRange: date })}
+                startDate={filters.createdDateRange[0]}
+                endDate={filters.createdDateRange[1]}
+                selectsRange
+                dateFormat="yyyy-MM-dd"
+              />
+            </div>
+            <div className="filter-element date-picker">
+              <label>Date of Service:</label>
+              <DatePicker
+                selected={filters.dateOfServiceRange[0]}
+                onChange={date => setFilters({ ...filters, dateOfServiceRange: date })}
+                startDate={filters.dateOfServiceRange[0]}
+                endDate={filters.dateOfServiceRange[1]}
+                selectsRange
+                dateFormat="yyyy-MM-dd"
+              />
+            </div>
           </div>
 
           <table className="issue-table">

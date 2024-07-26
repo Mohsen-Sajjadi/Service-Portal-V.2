@@ -208,14 +208,14 @@
       "createdDate": "2024-04-10",
       "label": "Service",
       "priority": "Low",
-      "status": "Resolved",
+      "status": "In Progress",
       "scheduleDate": "2024-04-12",
       "dateOfService": "",
-      "engineer": "Mohsen Sajjadi",
+      "engineer": "Isaac Miramontes",
       "activities": "",
-      "serviceType": "Preventative Maintenance (Remote)",
+      "serviceType": "Preventative Maintenance (Site)",
       "hours": "8",
-      "lastUpdated": "2024-07-19T18:00:47.489Z",
+      "lastUpdated": "2024-05-17T15:20:59.240Z",
       "projectId": 1,
       "id": 1
     },
@@ -226,7 +226,7 @@
       "requestedBy": "Todd",
       "createdDate": "2024-04-10",
       "label": "Service",
-      "priority": "Low",
+      "priority": "High",
       "status": "Resolved",
       "scheduleDate": "",
       "dateOfService": "",
@@ -234,7 +234,7 @@
       "activities": "has been solved (re tuned)",
       "serviceType": "",
       "hours": "8",
-      "lastUpdated": "2024-07-19T15:36:54.637Z",
+      "lastUpdated": "2024-06-24T20:43:37.604Z",
       "projectId": 1,
       "id": 2
     },
@@ -489,25 +489,6 @@
       "lastUpdated": "2024-06-19T21:19:57.654Z",
       "projectId": 3,
       "id": 20
-    },
-    {
-      "project": 1,
-      "issueDescription": "Chiller 1 iso valve",
-      "siteBuilding": "Building C",
-      "requestedBy": "test",
-      "createdDate": "2024-07-19",
-      "label": "Service",
-      "priority": "High",
-      "status": "Open",
-      "scheduleDate": "2024-07-23",
-      "dateOfService": "",
-      "engineer": "Isaac Miramontes",
-      "activities": "",
-      "serviceType": "Preventative Maintenance (Site)",
-      "hours": "",
-      "lastUpdated": "2024-07-19T17:44:55.055Z",
-      "projectId": 1,
-      "id": 21
     }
   ]
 }

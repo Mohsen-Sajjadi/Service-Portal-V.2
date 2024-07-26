@@ -38,10 +38,10 @@ const TritonPortalComponent = () => {
     issueDescription: '',
     siteBuilding: '',
     requestedBy: '',
-    createdDate: '',
+    createdDateRange: [null, null],
     label: '',
-    scheduleDate: '',
-    dateOfService: '',
+    scheduleDateRange: [null, null],
+    dateOfServiceRange: [null, null],
     engineer: '',
     activities: '',
     serviceType: '',
@@ -384,15 +384,15 @@ const TritonPortalComponent = () => {
       (!filters.searchText || issue.issueDescription.toLowerCase().includes(filters.searchText.toLowerCase())) &&
       (!filters.priority || issue.priority === filters.priority) &&
       (!filters.status || issue.status === filters.status) &&
+      (!filters.label || issue.label === filters.label) &&
       (!filters.siteBuilding || issue.siteBuilding.toLowerCase().includes(filters.siteBuilding.toLowerCase())) &&
       (!filters.requestedBy || issue.requestedBy.toLowerCase().includes(filters.requestedBy.toLowerCase())) &&
-      (!filters.createdDateStart || (createdDate && createdDate >= new Date(filters.createdDateStart))) &&
-      (!filters.createdDateEnd || (createdDate && createdDate <= new Date(filters.createdDateEnd))) &&
-      (!filters.label || issue.label === filters.label) &&
-      (!filters.scheduleDateStart || (scheduleDate && scheduleDate >= new Date(filters.scheduleDateStart))) &&
-      (!filters.scheduleDateEnd || (scheduleDate && scheduleDate <= new Date(filters.scheduleDateEnd))) &&
-      (!filters.dateOfServiceStart || (dateOfService && dateOfService >= new Date(filters.dateOfServiceStart))) &&
-      (!filters.dateOfServiceEnd || (dateOfService && dateOfService <= new Date(filters.dateOfServiceEnd))) &&
+      (!filters.createdDateRange[0] || (createdDate && createdDate >= filters.createdDateRange[0])) &&
+      (!filters.createdDateRange[1] || (createdDate && createdDate <= filters.createdDateRange[1])) &&
+      (!filters.scheduleDateRange[0] || (scheduleDate && scheduleDate >= filters.scheduleDateRange[0])) &&
+      (!filters.scheduleDateRange[1] || (scheduleDate && scheduleDate <= filters.scheduleDateRange[1])) &&
+      (!filters.dateOfServiceRange[0] || (dateOfService && dateOfService >= filters.dateOfServiceRange[0])) &&
+      (!filters.dateOfServiceRange[1] || (dateOfService && dateOfService <= filters.dateOfServiceRange[1])) &&
       (!filters.engineer || issue.engineer.toLowerCase().includes(filters.engineer.toLowerCase())) &&
       (!filters.activities || issue.activities.toLowerCase().includes(filters.activities.toLowerCase())) &&
       (!filters.serviceType || issue.serviceType.toLowerCase().includes(filters.serviceType.toLowerCase())) &&
@@ -548,13 +548,10 @@ const TritonPortalComponent = () => {
                   issueDescription: '',
                   siteBuilding: '',
                   requestedBy: '',
-                  createdDateStart: '',
-                  createdDateEnd: '',
+                  createdDateRange: [null, null],
                   label: '',
-                  scheduleDateStart:'',
-                  scheduleDateEnd: '',
-                  dateOfServiceStart: '',
-                  dateOfServiceEnd: '',
+                  scheduleDateRange: [null, null],
+                  dateOfServiceRange: [null, null],
                   engineer: '',
                   activities: '',
                   serviceType: '',
@@ -642,60 +639,33 @@ const TritonPortalComponent = () => {
                   <div>
                     <label>Created Date:</label>
                     <DatePicker
-                      selected={filters.createdDateStart}
-                      onChange={date => setFilters({ ...filters, createdDateStart: date })}
-                      selectsStart
-                      startDate={filters.createdDateStart}
-                      endDate={filters.createdDateEnd}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                    <DatePicker
-                      selected={filters.createdDateEnd}
-                      onChange={date => setFilters({ ...filters, createdDateEnd: date })}
-                      selectsEnd
-                      startDate={filters.createdDateStart}
-                      endDate={filters.createdDateEnd}
-                      minDate={filters.createdDateStart}
+                      selected={filters.createdDateRange[0]}
+                      onChange={date => setFilters({ ...filters, createdDateRange: date })}
+                      startDate={filters.createdDateRange[0]}
+                      endDate={filters.createdDateRange[1]}
+                      selectsRange
                       dateFormat="yyyy-MM-dd"
                     />
                   </div>
                   <div>
                     <label>Schedule Date:</label>
                     <DatePicker
-                      selected={filters.scheduleDateStart}
-                      onChange={date => setFilters({ ...filters, scheduleDateStart: date })}
-                      selectsStart
-                      startDate={filters.scheduleDateStart}
-                      endDate={filters.scheduleDateEnd}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                    <DatePicker
-                      selected={filters.scheduleDateEnd}
-                      onChange={date => setFilters({ ...filters, scheduleDateEnd: date })}
-                      selectsEnd
-                      startDate={filters.scheduleDateStart}
-                      endDate={filters.scheduleDateEnd}
-                      minDate={filters.scheduleDateStart}
+                      selected={filters.scheduleDateRange[0]}
+                      onChange={date => setFilters({ ...filters, scheduleDateRange: date })}
+                      startDate={filters.scheduleDateRange[0]}
+                      endDate={filters.scheduleDateRange[1]}
+                      selectsRange
                       dateFormat="yyyy-MM-dd"
                     />
                   </div>
                   <div>
                     <label>Date of Service:</label>
                     <DatePicker
-                      selected={filters.dateOfServiceStart}
-                      onChange={date => setFilters({ ...filters, dateOfServiceStart: date })}
-                      selectsStart
-                      startDate={filters.dateOfServiceStart}
-                      endDate={filters.dateOfServiceEnd}
-                      dateFormat="yyyy-MM-dd"
-                    />
-                    <DatePicker
-                      selected={filters.dateOfServiceEnd}
-                      onChange={date => setFilters({ ...filters, dateOfServiceEnd: date })}
-                      selectsEnd
-                      startDate={filters.dateOfServiceStart}
-                      endDate={filters.dateOfServiceEnd}
-                      minDate={filters.dateOfServiceStart}
+                      selected={filters.dateOfServiceRange[0]}
+                      onChange={date => setFilters({ ...filters, dateOfServiceRange: date })}
+                      startDate={filters.dateOfServiceRange[0]}
+                      endDate={filters.dateOfServiceRange[1]}
+                      selectsRange
                       dateFormat="yyyy-MM-dd"
                     />
                   </div>

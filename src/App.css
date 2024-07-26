@@ -1,24 +1,24 @@
 /* General App Styling */
 .app-container {
-  font-family: 'Roboto', 'Arial', sans-serif; 
-  font-size: 18px; 
-  color: #202124; 
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 18px;
+  color: #202124;
 }
 
 .app-header {
   display: flex;
-  justify-content: space-between; /* Align items with space in between */
+  justify-content: space-between;
   align-items: center;
-  background-color: #132a49; 
+  background-color: #132a49;
   color: #ffffff;
   padding: 24px;
-  font-size: 25px; /* Set font size */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set font family */
+  font-size: 25px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .app-logo {
-  height: 70px; 
-  margin-bottom: 1px; 
+  height: 70px;
+  margin-bottom: 1px;
 }
 
 .app-nav ul {
@@ -26,12 +26,13 @@
   width: 100%;
   list-style: none;
   padding: 0;
-  background-color: #2c2e3a; /* Light background for nav */
+  background-color: #2c2e3a;
   align-items: center;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow under nav */
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
 }
+
 .logout-button {
-  margin-left: auto; /* This pushes the logout button to the right */
+  margin-left: auto;
 }
 
 .app-nav li {
@@ -40,51 +41,53 @@
 
 .app-nav li a {
   display: block;
-  color: #f5f6f7; 
+  color: #f5f6f7;
   text-align: center;
   padding: 16px 20px;
   text-decoration: none;
-  border-radius: 4px; 
+  border-radius: 4px;
 }
 
 .app-nav li a:hover {
-  background-color: #345da5; 
-}
-
-.app-nav {
-  margin-left: auto;
+  background-color: #345da5;
 }
 
 .login-button {
   padding: 10px 25px;
-  background-color: #1a73e8; 
+  background-color: #1a73e8;
   color: white;
   border: none;
-  border-radius: 4px; 
+  border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .app-main {
   padding: 24px;
-  background-color: #fff; 
-  border-top: 1px solid #eceff1; 
+  background-color: #fff;
+  border-top: 1px solid #eceff1;
 }
 
 /* Form Styling */
 .form-container {
   margin: 20px 0;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .form {
-  background-color: #f2f2f2; /* Form background color */
+  background-color: #f2f2f2;
   padding: 20px;
-  border-radius: 10px; /* More rounded corners */
+  border-radius: 10px;
 }
 
 .form label {
   margin-bottom: 10px;
   display: block;
+  font-weight: bold;
 }
 
 .form input[type="text"],
@@ -93,48 +96,109 @@
 .form input[type="password"],
 .form input[type="number"],
 .form textarea,
-.form select {
+.form select,
+.form-field input,
+.form-field select,
+.form-field textarea {
   width: 100%;
-  padding: 14px 20px; /* Increased padding for larger input fields */
+  padding: 14px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 10px; /* More rounded corners */
+  border-radius: 10px;
   box-sizing: border-box;
   transition: border-color 0.3s ease-in-out;
-  font-size: 18px; /* Increased font size for better readability */
+  font-size: 18px;
 }
 
-.form input[type="text"]:focus,
-.form input[type="date"]:focus,
-.form input[type="password"]:focus,
+.form input:focus,
 .form textarea:focus,
-.form select:focus {
-  border-color: #45a049; /* Focus border color */
+.form select:focus,
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: #45a049;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+  outline: none;
 }
 
-.form button {
+.form button,
+.form-field button {
   width: 100%;
-  background-color: #354974; /* Button color */
+  background-color: #354974;
   color: white;
-  padding: 16px 20px; /* Increased padding for larger buttons */
-  margin: 8px 0;
+  padding: 16px 20px;
   border: none;
-  border-radius: 10px; /* More rounded corners */
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  font-size: 16px; /* Increased font size for better readability */
+  font-size: 16px;
 }
 
-.form button:hover {
-  background-color: #45a049; /* Button hover color */
+.form button:hover,
+.form-field button:hover {
+  background-color: #45a049;
+}
+
+select {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ced4da;
+  background-color: #ffffff;
+  font-size: 1.2rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+select:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+option {
+  padding: 0.5rem;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  margin-right: 8px;
+}
+
+.new-request-button,
+.edit-button,
+.remove-button,
+.cancel-button {
+  background-color: #3264a5;
+  color: white;
+}
+
+.new-request-button:hover,
+.edit-button:hover,
+.remove-button:hover,
+.cancel-button:hover {
+  background-color: #302e2b;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+
+button:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
 }
 
 /* Modern Table Styling */
 .issue-table {
   width: 100%;
   border-collapse: collapse;
-  border-spacing: 0;
   margin: 20px 0;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   border-radius: 15px;
@@ -162,26 +226,15 @@
   background-color: #f0f0f0;
 }
 
-.issue-table th:last-child,
-.issue-table td:last-child {
-  border-right: none;
-}
-
 .issue-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
 .issue-table td {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333; /* General color for table cells */
+  color: #333;
 }
 
-.issue-table tr:not(:first-child):hover {
-  background-color: #e2e5e9;
-  transition: background-color 0.3s;
-}
-
-/* Increased Specificity for Status Colors */
 .issue-table td.status-open {
   color: blue !important;
 }
@@ -198,15 +251,26 @@
   color: green !important;
 }
 
-/* Text Truncation */
 .truncate-text {
   max-width: 150px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .table-container {
   overflow-x: auto;
+}
+
+/* Custom styles for messages */
+.success-message {
+  color: #1e213a;
+  margin: 10px 0;
+}
+
+.error-message {
+  color: #dc3545;
+  margin: 10px 0;
 }
 
 /* Tab Styling (React Tabs) */
@@ -227,14 +291,12 @@
   display: inline-block;
   border: 1px solid #546bb1;
   border-bottom: none;
-  bottom: -1px;
   position: relative;
-  list-style: none;
-  padding: 10px 20px; /* Increased padding for larger tabs */
+  padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  font-size: 18px; /* Increased font size for better readability */
-  border-radius: 10px 10px 0 0; /* More rounded corners */
+  font-size: 18px;
+  border-radius: 10px 10px 0 0;
 }
 
 .custom-tab:hover,
@@ -252,426 +314,105 @@
   display: block;
 }
 
-/* Custom styles for messages */
-.success-message {
-  color: #1e213a; /* Success color */
-  margin: 10px 0;
-}
-
-.error-message {
-  color: #dc3545; /* Error color */
-  margin: 10px 0;
-}
-
-/* Style for the dropdown */
-select {
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ced4da;
-  background-color: #ffffff;
-  font-size: 1.2rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-select:focus {
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-/* Styling the options */
-option {
-  padding: 0.5rem;
-}
-
-/* Style for buttons in general */
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 10px; /* More rounded corners */
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s, box-shadow 0.2s;
-  margin-right: 8px;
-}
-
-/* New Request button specific style */
-.new-request-button {
-  background-color: #3264a5; /* Green color for 'new' actions */
-  color: white;
-}
-
-.new-request-button:hover {
-  background-color: #302e2b;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-}
-
-/* Edit button specific style */
-.edit-button {
-  background-color: #3264a5; /* Yellow color for 'edit' actions */
-  color: rgb(252, 252, 252);
-}
-
-.edit-button:hover {
-  background-color: #302e2b;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-}
-
-/* Remove button specific style */
-.remove-button {
-  background-color: #3264a5; /* Red color for 'remove' actions */
-  color: white;
-}
-
-.remove-button:hover {
-  background-color: #302e2b;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-}
-
-/* Cancel button specific style, if there's one */
-.cancel-button {
-  background-color: #3264a5; /* Gray color for 'cancel' actions */
-  color: white;
-}
-
-.cancel-button:hover {
-  background-color: #302e2b;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-}
-
-/* Applying some space around the buttons */
-button:not(:last-child) {
+/* Filter Bar and Elements Styling */
+.filter-tabs, .filter-element, .filter-button {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px; /* Space between elements */
   margin-bottom: 10px;
 }
 
-/* Aligning the buttons to the left for better grouping */
-.button-group {
-  display: flex;
-  align-items: center;
-}
-
-/* Form fields for project details */
-/* Modernized Form Fields */
-.form-field input, .form-field select, .form-field textarea {
-  width: calc(100% - 20px); /* Full width minus padding */
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 10px; /* More rounded corners */
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-  border-color: #4A90E2; /* A nice focus color */
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3); /* Outer glow effect */
-  outline: none; /* Removes the default focus outline */
-}
-
-.form-field label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-/* Enhance buttons for form submission */
-.form-field button {
-  padding: 10px 15px;
-  background-color: #4A90E2; /* Match the focus color */
-  color: white;
-  border: none;
-  border-radius: 10px; /* More rounded corners */
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.form-field button:hover {
-  background-color: #357ABD; /* A darker shade for hover */
-}
-
-.form-field input[type="text"],
-.form-field input[type="date"],
-.form-field input[type="password"] {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #ccc;
-  border-radius: 10px; /* More rounded corners */
-  box-sizing: border-box;
-  transition: border-color 0.3s ease-in-out;
-}
-
-.form-field input[type="text"]:focus,
-.form-field input[type="date"]:focus,
-.form-field input[type="password"]:focus {
-  border-color: #45a049; /* Focus border color */
-}
-
-.form-field input[type="text"]::placeholder,
-.form-field input[type="date"]::placeholder,
-.form-field input[type="password"]::placeholder {
-  color: #999; /* Placeholder color */
-}
-
-.form-field label {
-  display:block;
-  margin-bottom: 5px;
-}
-
-.form-field button {
-  background-color: #354974; /* Button color */
-  color: white;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 10px; /* More rounded corners */
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.form-field button:hover {
-  background-color: #45a049; /* Button hover color */
-}
-
-/* Form container styling */
-.form-container {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 10px; /* More rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
-/* Labels */
-.form-container label {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
-  display: block;
-}
-
-/* Text inputs and textareas */
-.form-container input[type='text'],
-.form-container input[type='date'],
-.form-container input[type='number'],
-.form-container textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 16px;
-  border: 1px solid #ced4da;
-  border-radius: 10px; /* More rounded corners */
-  font-size: 0.875rem;
-}
-
-/* Select dropdowns */
-.form-container select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 16px;
-  border: 1px solid #ced4da;
-  border-radius: 10px; /* More rounded corners */
-  background-color: #fff;
-  font-size: 0.875rem;
-}
-
-/* File input styling */
-.form-container input[type='file'] {
-  border: none;
-  margin-bottom: 16px;
-}
-
-/* Submit button styling */
-.form-container button[type='submit'] {
-  background-color: #3264a5;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 10px; /* More rounded corners */
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  margin-top: 10px;
-}
-
-.form-container button[type='submit']:hover {
-  background-color: #3264a5;
-}
-
-/* Handling focus on inputs for accessibility */
-.form-container input:focus,
-.form-container select:focus,
-.form-container textarea:focus {
-  outline: none;
-  border-color: #80bdff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-}
-
-/* Layout adjustments using Flexbox */
-.filter-bar, .button-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2px;
-}
-
-/* Media query for responsive design */
-@media (max-width: 768px) {
-  .project-details {
-    flex-direction: column;
-  }
-  .filter-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-
-/* Filter Bar Styling */
-.filter-bar {
-  background-color: #f8f9fa; /* Light gray background for the filter bar */
-  padding: 15px;
-  border-radius: 10px; /* More rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px; /* Adds a gap between items */
-  justify-content: flex-start;
-  align-items: center;
-}
-
-/* Filter Bar Button Styling */
-.filter-bar button {
+.filter-button, .filter-element, .filter-button {
   padding: 8px 16px;
-  background-color: #3264a5; /* Bootstrap primary blue */
+  background-color: #3264a5;
   color: white;
   border: none;
-  border-radius: 10px; /* More rounded corners */
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.filter-bar button:hover {
-  background-color: #172c47; /* Darken button on hover */
+.filter-button:hover {
+  background-color: #1d314b;
 }
 
-/* Filter Bar Input and Select Styling */
-.filter-bar input,
-.filter-bar select {
+.download-csv-button {
+  background-color: #3264a5;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.download-csv-button:hover {
+  background-color: #1d314b;
+}
+
+.filter-element select,
+.filter-element input {
   padding: 8px;
-  border: 1px solid #ced4da; /* Bootstrap's border color */
-  border-radius: 10px; /* More rounded corners */
-  font-size: 1rem; /* Adjust font size as needed */
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-/* Filter Bar Date Picker Styling */
-.filter-bar .date-filter div {
-  margin-right: 0; /* Remove the margin */
-  z-index: 9999; /* Ensures the date picker is on top of other elements */
-}
-
-/* Custom styles for react-datepicker */
-.react-datepicker-wrapper {
+.filter-element label {
   margin-right: 10px;
 }
 
-/* Responsive styling for the filter bar */
-@media (max-width: 768px) {
-  .filter-bar {
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .filter-bar button,
-  .filter-bar input,
-  .filter-bar select {
-    width: 100%; /* Full width on smaller screens */
-    margin-bottom: 10px;
-  }
-
-  .react-datepicker-wrapper {
-    width: 100%; /* Full width on smaller screens */
-  }
+.date-picker {
+  display: flex;
+  align-items: center;
 }
 
-/* Enhance visibility of active filters */
-.filter-bar input:not([value=""]),
-.filter-bar select:not([value=""]) {
-  border-color: #80bdff;
-  background-color: #e7f1ff;
+.date-picker label {
+  margin-right: 10px;
 }
 
-/* Style adjustments for the filter reset button */
-.reset-filters-button {
-  background-color: #dc3545; /* Bootstrap danger red */
+.filter-tabs h3 {
+  margin-right: 20px;
+  color: #2E4053;
 }
 
-.reset-filters-button:hover {
-  background-color: #bd2130; /* Darken button on hover */
+.filter-bar input,
+.filter-bar select {
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  font-size: 1rem;
 }
 
-/* Table Styling Adjustments */
-.issue-table {
-  width: 100%; /* Ensure the table uses the full width available */
-  border-collapse: collapse; /* Collapses border to avoid double lines */
-  table-layout: fixed; /* Fixes table layout to obey the width settings */
-}
-
-.issue-table th,
-.issue-table td {
-  border: 1px solid #ddd; /* Consistent border styling */
-  padding: 10px; /* Adequate padding for content */
-  word-wrap: break-word; /* Breaks the words to prevent overflow */
-  overflow-wrap: break-word; /* Ensures the words break to prevent overflow */
-}
-
-.issue-table th {
-  position: sticky; /* Keeps the header on top while scrolling */
-  top: 0;
-  background-color: #3264a5; /* Header background for distinction */
-  z-index: 10; /* Ensures the header is above other elements */
-}
-
-/* Responsive styling to ensure table fits within the HTML page */
-@media (max-width: 768px) {
-  .issue-table {
-    display: block; /* Changes the table to a block element */
-    overflow-x: auto; /* Allows horizontal scrolling if table is wider than screen */
-  }
-}
-
-.truncate-text {
-  max-width: 150px; /* Or whatever maximum width you prefer */
-  white-space: nowrap; /* Prevents wrapping */
-  overflow: hidden; /* Hides overflow */
-  text-overflow: ellipsis; /* Adds ellipsis to truncated text */
-}
-
+/* Modal Styling */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Darker for better focus on modal */
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1050;
-  backdrop-filter: blur(5px); /* Adds a blur effect to the background */
+  backdrop-filter: blur(5px);
 }
 
 .modal-content {
-  background: #fff; /* Clean white background */
-  color: #333; /* Slightly darker text for better readability */
-  padding: 40px; /* More padding for a roomier feel */
-  border-radius: 12px; /* Updated border radius for softer edges */
-  max-width: 600px; /* Optimal width for readability */
-  width: 90%; /* Makes it responsive */
-  max-height: 80vh; /* Set a max-height for the modal content */
-  overflow-y: auto; /* Enable vertical scrolling */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Softer shadow for a modern look */
-  animation: modal-in 0.3s; /* Smooth fade-in effect */
+  background: #fff;
+  color: #333;
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: modal-in 0.3s;
 }
 
 @keyframes modal-in {
@@ -685,34 +426,35 @@ button:not(:last-child) {
   }
 }
 
+/* Project Card Styling */
 .project-card {
-  border: 1px solid #ccc; /* Lighter border for a cleaner look */
-  border-radius: 10px; /* Soft, rounded corners */
+  border: 1px solid #ccc;
+  border-radius: 10px;
   padding: 20px;
   margin: 20px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly heavier shadow for more depth */
-  background-color: #fff; /* Pure white background for brightness */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: block;
-  position: relative; /* Ensures that it can use z-index */
-  z-index: 1; /* Higher z-index so it pops out like a modal */
+  position: relative;
+  z-index: 1;
 }
 
 .project-card:hover {
-  transform: translateY(-5px); /* Lifts card on hover for a dynamic effect */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover for more focus */
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .project-title {
-  font-size: 28px; /* Adjust the size as needed */
-  color: #2E4053; /* Deep blue color for sophistication */
-  text-align: left; /* Align the title to the left */
-  margin-bottom: 20px; /* Add some space below the title */
-  padding: 10px 0; /* Add some padding for a better look */
-  border-radius: 10px; /* Rounded corners for a modern look */
+  font-size: 28px;
+  color: #2E4053;
+  text-align: left;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-radius: 10px;
 }
 
-/* Project Details Styling - Modernized */
+/* Project Details Styling */
 .project-details {
   background: linear-gradient(145deg, #ffffff, #f0f0f0);
   border-radius: 12px;
@@ -720,183 +462,88 @@ button:not(:last-child) {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.4);
   margin-top: 25px;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease; /* Smooth transitions for hover effects */
+  transition: all 0.3s ease;
 }
 
 .project-details:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
-  transform: translateY(-3px); /* Subtle lift effect on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
 }
+
 .project-details-title {
   color: #2a416f;
   margin-bottom: 20px;
-  font-size: 24px; /* Slightly larger for more impact */
+  font-size: 24px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1.2px; /* Slightly increased for better spacing */
+  letter-spacing: 1.2px;
 }
 
 .project-detail {
-  margin-bottom: 15px; /* Increased space between details for better readability */
+  margin-bottom: 15px;
   font-size: 16px;
   color: #2a416f;
-  line-height: 1.6; /* Slightly more line spacing for readability */
+  line-height: 1.6;
 }
+
 .detail-label {
   font-weight: bold;
-  color: #334764; /* Slightly darker for better contrast */
+  color: #334764;
   display: inline-block;
-  min-width: 140px; /* Increased min-width for better label alignment */
-  margin-right: 10px; /* Added right margin for clear separation from the detail text */
+  min-width: 140px;
+  margin-right: 10px;
 }
 
 .detail-label:after {
   content: ':';
-  margin-left: 2px; /* Added space after the colon for better visual separation */
+  margin-left: 2px;
 }
 
-.download-csv-button {
-  background-color: #3264a5; /* Green background */
-  color: white; /* White text */
-  padding: 10px 15px; /* Padding around the text */
-  border: none; /* No border */
-  border-radius: 10px; /* More rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  margin-top: 10px; /* Margin at the top */
-  font-size: 18px; /* Text size */
-}
-
-.download-csv-button:hover {
-  background-color: #131414; /* Darker green on hover */
-}
-
-/* Login Form Styling */
-form {
-  max-width: 800px;
-  margin: 50px 0 50px 50px; /* Adjust the margin to move the form to the left */
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px; /* More rounded corners */
-  box-shadow: 0 2px 4px rgba(0,0,0,.2);
-  background: #fff;
-}
-
-form div {
-  margin-bottom: 15px;
-}
-
-label {
-  display: flex;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 10px; /* More rounded corners */
-  box-sizing: border-box; /* Makes the input fields include padding in their total width */
-}
-
-button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 10px; /* More rounded corners */
-  background-color: #007bff;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-input[name="issueDescription"],
-input[name="siteBuilding"],
-input[name="requestedBy"],
-input[name="createdDate"],
-input[name="label"],
-input[name="attachedFile"],
-input[name="priority"],
-input[name="status"],
-input[name="scheduleDate"],
-input[name="dateOfService"],
-input[name="engineer"],
-input[name="activities"],
-input[name="serviceType"],
-input[name="hours"] {
-  font-size: 20px; /* Set a larger font size */
-}
-
+/* Home Container Styling */
 .home-container {
   text-align: center;
   padding: 50px;
-  color: #333; /* Adjust based on your color scheme */
+  color: #333;
 }
 
 .home-container h1 {
-  color: #2E4053; /* Sophisticated deep blue */
+  color: #2E4053;
   margin-bottom: 20px;
 }
 
 .home-container p {
-  font-size: 18px; /* Larger text for readability */
-  color: #555; /* Soft contrast for readability */
+  font-size: 18px;
+  color: #555;
 }
 
 .contact-link {
   display: inline-block;
-  background-color: #4A90E2; /* A vibrant color for the link */
+  background-color: #4A90E2;
   color: white;
   padding: 10px 20px;
-  border-radius: 10px; /* More rounded corners */
+  border-radius: 10px;
   text-decoration: none;
   transition: background-color 0.3s;
 }
 
 .contact-link:hover {
-  background-color: #357ABD; /* Darker shade for hover effect */
+  background-color: #357ABD;
 }
 
-/* Filter Bar Button Styling */
-.filter-button {
-  padding: 8px 16px;
-  background-color: #3264a5; /* Bootstrap primary blue */
-  color: white;
-  border: none;
-  border-radius: 10px; /* More rounded corners */
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.filter-button:hover {
-  background-color: #1d314b; /* Darken button on hover */
-}
-
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+/* Engineer Form Container Styling */
 .engineer-form-container .form-group input {
-  width: 100%; /* Ensures the input takes the full width of its container */
-  padding: 8px; /* Provides padding inside the input for text */
-  margin: 10px 0; /* Adds space above and below the input */
-  border: 1px solid #ccc; /* Adds a light grey border around the input */
-  border-radius: 10px; /* More rounded corners */
-  box-sizing: border-box; /* Ensures padding does not affect the overall dimensions */
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .engineer-form-container .form-group input:focus {
-  outline: none; /* Removes the default focus outline */
-  border-color: #66afe9; /* Changes border color on focus for better visibility */
-  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6); /* Adds a subtle shadow around the input when focused */
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
 }
 
 .project-info {
@@ -905,3 +552,4 @@ input[name="hours"] {
   color: #2a416f;
   line-height: 1.5;
 }
+
