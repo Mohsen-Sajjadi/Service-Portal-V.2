@@ -276,7 +276,7 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
                 </div>
 
                 <button className="submit-button" type="submit">{issue ? 'Update' : 'Submit'}</button>
-                <button type="button" className="remove-button" onClick={handleRemove}>Remove</button>
+                <button type="button" className="remove-button" onClick={handleRemove} disabled>Remove</button>
                 <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
             </form>
         </div>

@@ -58,13 +58,13 @@ const TritonPortalComponent = () => {
       return; // Optionally handle a redirect here or show a message
     }
 
-    if (isAuthenticated && user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('admin')) {
+    if (isAuthenticated && (user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('admin') || user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('engineer'))) {
       fetchProjects();
       fetchEngineers();
     } else {
-      console.log("User is not an admin or not authenticated.");
+      console.log("User is not an admin or engineer or not authenticated.");
     }
-  }, [isAuthenticated, isLoading, user]); 
+  }, [isAuthenticated, isLoading, user]);
 
   useEffect(() => {
     if (showIssueForm) {
@@ -420,78 +420,86 @@ const TritonPortalComponent = () => {
 
   return (
     <div className="app-container">
-      <h1>Admin Portal</h1>
+      <h1>Triton Portal</h1>
       <Tabs className="custom-tabs">
         <TabList className="custom-tab-list">
-          <Tab className="custom-tab">Add/Edit Project</Tab>
-          <Tab className="custom-tab">Engineers</Tab>
+          {user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('admin') && (
+            <>
+              <Tab className="custom-tab">Add/Edit Project</Tab>
+              <Tab className="custom-tab">Engineers</Tab>
+            </>
+          )}
           <Tab className="custom-tab">View Projects</Tab>
           <Tab className="custom-tab">KPI and Reports</Tab>
         </TabList>
 
-        <TabPanel>
-          {successMessage && <div className="success-message">{successMessage}</div>}
-          <form onSubmit={handleSubmit} className="form">
-            <input type="text" name="project" value={project.project || ''} placeholder="Project Name" onChange={handleChange} />
-            <input type="text" name="client" value={project.client || ''} placeholder="Client Name" onChange={handleChange} />
-            <input type="text" name="address" value={project.address || ''} placeholder="Address" onChange={handleChange} /> 
-            <input type="email" name="email" value={project.email || ''} placeholder="Email Address" onChange={handleChange} />
-            <input type="date" name="startDate" value={project.startDate || ''} placeholder="Start Date" onChange={handleChange} />
-            <input type="date" name="endDate" value={project.endDate || ''} placeholder="End Date" onChange={handleChange} />
-            <input type="number" name="totalServiceHoursIncluded" value={project.totalServiceHoursIncluded || ''} placeholder="Total Service Hours Included" onChange={handleChange} />
-            <input type="text" name="username" value={project.username || ''} placeholder="Username" onChange={handleChange} />
-            {isEditing ? (
-              <>
-                <button type="button" className="cancel-button" onClick={handleCancelEdit}>Cancel</button>
-                <button type="submit" className="save-button">Save Changes</button>
-              </>
-            ) : (
-              <button type="submit" className="add-button">Add Project</button>
-            )}
-          </form>
-        </TabPanel>
-
-        <TabPanel>
-          <div className="engineer-form-container">
-            <h2>Engineers</h2>
-            <select
-              value={selectedEngineerId}
-              onChange={handleChangeEngineer}
-            >
-              <option value="">Select an Engineer</option>
-              {engineers.map((engineer) => (
-                <option key={engineer.id} value={engineer.id}>
-                  {engineer.name}
-                </option>
-              ))}
-            </select>
-            <button onClick={handleClearForm} style={{ marginLeft: '10px' }}>Add New Engineer</button>
-
-            <form onSubmit={handleEngineerSubmit}>
-              <div className="form-group">
-                <label>Name:</label>
-                <input
-                  type="text"
-                  value={engineerName}
-                  onChange={(e) => setEngineerName(e.target.value)}
-                  placeholder="Engineer's Name"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Email:</label>
-                <input
-                  type="email"
-                  value={engineerEmail}
-                  onChange={(e) => setEngineerEmail(e.target.value)}
-                  placeholder="Engineer's Email"
-                  required
-                />
-              </div>
-              <button type="submit" className="add-button">{selectedEngineerId ? "Update Engineer" : "Add Engineer"}</button>
+        {user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('admin') && (
+          <TabPanel>
+            {successMessage && <div className="success-message">{successMessage}</div>}
+            <form onSubmit={handleSubmit} className="form">
+              <input type="text" name="project" value={project.project || ''} placeholder="Project Name" onChange={handleChange} />
+              <input type="text" name="client" value={project.client || ''} placeholder="Client Name" onChange={handleChange} />
+              <input type="text" name="address" value={project.address || ''} placeholder="Address" onChange={handleChange} />
+              <input type="email" name="email" value={project.email || ''} placeholder="Email Address" onChange={handleChange} />
+              <input type="date" name="startDate" value={project.startDate || ''} placeholder="Start Date" onChange={handleChange} />
+              <input type="date" name="endDate" value={project.endDate || ''} placeholder="End Date" onChange={handleChange} />
+              <input type="number" name="totalServiceHoursIncluded" value={project.totalServiceHoursIncluded || ''} placeholder="Total Service Hours Included" onChange={handleChange} />
+              <input type="text" name="username" value={project.username || ''} placeholder="Username" onChange={handleChange} />
+              {isEditing ? (
+                <>
+                  <button type="button" className="cancel-button" onClick={handleCancelEdit}>Cancel</button>
+                  <button type="submit" className="save-button">Save Changes</button>
+                </>
+              ) : (
+                <button type="submit" className="add-button">Add Project</button>
+              )}
             </form>
-          </div>
-        </TabPanel>
+          </TabPanel>
+        )}
+
+        {user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('admin') && (
+          <TabPanel>
+            <div className="engineer-form-container">
+              <h2>Engineers</h2>
+              <select
+                value={selectedEngineerId}
+                onChange={handleChangeEngineer}
+              >
+                <option value="">Select an Engineer</option>
+                {engineers.map((engineer) => (
+                  <option key={engineer.id} value={engineer.id}>
+                    {engineer.name}
+                  </option>
+                ))}
+              </select>
+              <button onClick={handleClearForm} style={{ marginLeft: '10px' }}>Add New Engineer</button>
+
+              <form onSubmit={handleEngineerSubmit}>
+                <div className="form-group">
+                  <label>Name:</label>
+                  <input
+                    type="text"
+                    value={engineerName}
+                    onChange={(e) => setEngineerName(e.target.value)}
+                    placeholder="Engineer's Name"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Email:</label>
+                  <input
+                    type="email"
+                    value={engineerEmail}
+                    onChange={(e) => setEngineerEmail(e.target.value)}
+                    placeholder="Engineer's Email"
+                    required
+                  />
+                </div>
+                <button type="submit" className="add-button">{selectedEngineerId ? "Update Engineer" : "Add Engineer"}</button>
+              </form>
+            </div>
+          </TabPanel>
+        )}
 
         <TabPanel>
           <h2>View Projects</h2>
@@ -512,8 +520,12 @@ const TritonPortalComponent = () => {
               <p className="project-detail"><span className="detail-label">End Date:</span> {project.endDate}</p>
               <p className="project-detail"><span className="detail-label">Total Service Hours Included:</span> {project.totalServiceHoursIncluded}</p>
               <p className="project-detail"><span className="detail-label">Total Service Hours:</span> {totalServiceHours}</p>
-              <button className="edit-button" onClick={() => handleEditProject(project.id)}>Edit</button>
-              <button className="remove-button" onClick={() => handleRemoveProject(project.id)}>Remove</button>
+              {user?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'].includes('admin') && (
+                <>
+                  <button className="edit-button" onClick={() => handleEditProject(project.id)}>Edit</button>
+                  <button className="remove-button" onClick={() => handleRemoveProject(project.id)}>Remove</button>
+                </>
+              )}
               <button className="new-request-button" onClick={openNewIssueForm} style={{ display: showIssueForm ? 'none' : 'inline-block' }}>New Request</button>
             </div>
           )}
@@ -746,4 +758,5 @@ const TritonPortalComponent = () => {
     </div>
   );
 };
+
 export default TritonPortalComponent;

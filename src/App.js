@@ -54,12 +54,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Home isAuthenticated={isAuthenticated} loginToClientPortal={loginToClientPortal} loginToTritonPortal={loginToTritonPortal} />} />
             <Route path="/client" element={
-              <RequireRole role="user">
+              <RequireRole roles={['user']}>
                 <ClientPortal />
               </RequireRole>
             } />
             <Route path="/triton" element={
-              <RequireRole role="admin">
+              <RequireRole roles={['admin', 'engineer']}>
                 <TritonPortal />
               </RequireRole>
             } />
