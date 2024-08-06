@@ -77,14 +77,14 @@ const TritonPortalComponent = () => {
   }, []);
 
   const fetchProjects = () => {
-    fetch('http://localhost:3001/projects')
+    fetch('http://localhost:3002/projects')
       .then(response => response.json())
       .then(data => setProjects(data))
       .catch(error => console.error('Error fetching projects:', error));
   };
 
   useEffect(() => {
-    fetch('http://localhost:3001/engineers')
+    fetch('http://localhost:3002/engineers')
       .then(response => response.json())
       .then(data => setEngineers(data))
       .catch(error => console.error('Error fetching engineers:', error));
@@ -94,7 +94,7 @@ const TritonPortalComponent = () => {
 
   const fetchProjectById = (projectId) => {
     console.log(`Fetching project details for project ID: ${projectId}`); // Debugging log
-    fetch(`http://localhost:3001/projects/${projectId}`)
+    fetch(`http://localhost:3002/projects/${projectId}`)
       .then(response => response.json())
       .then(data => {
         console.log('Project data fetched:', data); // Debugging log
@@ -105,7 +105,7 @@ const TritonPortalComponent = () => {
   };
 
   const fetchProjectIssues = useCallback((projectId) => {
-    fetch(`http://localhost:3001/issues?project=${projectId}`)
+    fetch(`http://localhost:3002/issues?project=${projectId}`)
       .then(response => response.json())
       .then(data => {
         setProjectIssues(data);
@@ -135,7 +135,7 @@ const TritonPortalComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = `http://localhost:3001/projects${isEditing ? `/${project.id}` : ''}`;
+    const url = `http://localhost:3002/projects${isEditing ? `/${project.id}` : ''}`;
     fetch(url, {
       method: isEditing ? 'PUT' : 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -167,7 +167,7 @@ const TritonPortalComponent = () => {
   };
 
   const fetchEngineers = () => {
-    fetch('http://localhost:3001/engineers')
+    fetch('http://localhost:3002/engineers')
       .then(response => response.json())
       .then(data => {
         setEngineers(data);
@@ -211,7 +211,7 @@ const TritonPortalComponent = () => {
   const handleEngineerSubmit = (event) => {
     event.preventDefault();
     const engineerData = { name: engineerName, email: engineerEmail };
-    const url = selectedEngineerId ? `http://localhost:3001/engineers/${selectedEngineerId}` : 'http://localhost:3001/engineers';
+    const url = selectedEngineerId ? `http://localhost:3002/engineers/${selectedEngineerId}` : 'http://localhost:3002/engineers';
     fetch(url, {
       method: selectedEngineerId ? 'PUT' : 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -226,7 +226,27 @@ const TritonPortalComponent = () => {
     .catch(error => console.error('Error saving engineer:', error));
   };
 
-  // Define the functions mentioned in the errors
+  const handleRemoveEngineer = () => {
+    const isConfirmed = window.confirm("Are you sure you want to remove this engineer?");
+    if (isConfirmed && selectedEngineerId) {
+      fetch(`http://localhost:3002/engineers/${selectedEngineerId}`, {
+        method: 'DELETE',
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Engineer removed successfully');
+          fetchEngineers(); // Refresh the engineers list
+          handleClearForm(); // Reset form after removal
+          setSuccessMessage('Engineer removed successfully!');
+          setTimeout(() => setSuccessMessage(''), 3000);
+        } else {
+          console.error('Failed to remove engineer');
+        }
+      })
+      .catch(error => console.error('Error removing engineer:', error));
+    }
+  };
+
   const handleCancelEdit = () => {
     setIsEditing(false);
     setProject({});
@@ -243,7 +263,7 @@ const TritonPortalComponent = () => {
 
     if (isConfirmed) {
       // Proceed with the removal if the user confirms
-      fetch(`http://localhost:3001/projects/${projectId}`, { method: 'DELETE' })
+      fetch(`http://localhost:3002/projects/${projectId}`, { method: 'DELETE' })
         .then(() => {
           setSuccessMessage('Project removed successfully!');
           setTimeout(() => setSuccessMessage(''), 3000);
@@ -298,7 +318,7 @@ const TritonPortalComponent = () => {
   const handleRemoveIssue = (issueId) => {
     const isConfirmed = window.confirm("Are you sure you want to remove this issue?");
     if (isConfirmed) {
-      fetch(`http://localhost:3001/issues/${issueId}`, { method: 'DELETE' })
+      fetch(`http://localhost:3002/issues/${issueId}`, { method: 'DELETE' })
         .then(response => {
           if (response.ok) {
             setSuccessMessage('Issue removed successfully!');
@@ -404,7 +424,7 @@ const TritonPortalComponent = () => {
   const handleRowClick = (issue) => {
     setModalContent({
       ...issue,
-      attachedFileUrl: issue.attachedFile ? `http://localhost:3001/${issue.attachedFile}` : null,
+      attachedFileUrl: issue.attachedFile ? `http://localhost:3002/${issue.attachedFile}` : null,
     });
     setShowModal(true);
   };
@@ -473,6 +493,7 @@ const TritonPortalComponent = () => {
                 ))}
               </select>
               <button onClick={handleClearForm} style={{ marginLeft: '10px' }}>Add New Engineer</button>
+              <button onClick={handleRemoveEngineer} style={{ marginLeft: '10px' }} disabled={!selectedEngineerId}>Remove Engineer</button> {/* New Remove Engineer Button */}
 
               <form onSubmit={handleEngineerSubmit}>
                 <div className="form-group">
@@ -539,6 +560,7 @@ const TritonPortalComponent = () => {
                 issue={selectedIssue}
                 onRemoveIssue={handleRemoveIssue}
                 onIssueSubmitSuccess={handleIssueSubmitSuccess}
+                getProjectNameById={getProjectNameById} // Pass the function as a prop
               />
               <button className="cancel-button" onClick={hideIssueForm}>Cancel</button>
             </>
@@ -718,7 +740,7 @@ const TritonPortalComponent = () => {
                   <td>{issue.requestedBy}</td>
                   <td>{issue.createdDate}</td>
                   <td>{issue.label}</td>
-                  <td>{issue.attachedFile ? <a href={`http://localhost:3001/${issue.attachedFile}`} target="_blank" rel="noopener noreferrer">Download</a> : ''}</td>
+                  <td>{issue.attachedFile ? <a href={`http://localhost:3002/${issue.attachedFile}`} target="_blank" rel="noopener noreferrer">Download</a> : ''}</td>
                   <td>{issue.priority}</td>
                   <td>{issue.scheduleDate}</td>
                   <td>{issue.dateOfService}</td>

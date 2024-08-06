@@ -2,14 +2,15 @@ import React, { useState, useEffect, forwardRef } from 'react';
 
 const IssueForm = forwardRef(({
   projectId,
-  engineers,  // Pass engineers to IssueForm
+  engineers,
   hideForm,
   issue,
   onRemoveIssue,
-  onIssueSubmitSuccess
+  onIssueSubmitSuccess,
+  getProjectNameById // Accept getProjectNameById as a prop
 }, ref) => {
   const [newIssue, setNewIssue] = useState({
-    project: parseInt(projectId, 10), // Ensure projectId is treated as an integer
+    project: parseInt(projectId, 10),
     issueDescription: issue?.issueDescription || '',
     siteBuilding: issue?.siteBuilding || '',
     requestedBy: issue?.requestedBy || '',
@@ -24,15 +25,14 @@ const IssueForm = forwardRef(({
     activities: issue?.activities || '',
     serviceType: issue?.serviceType || '',
     hours: issue?.hours || '',
-    lastUpdated: issue?.lastUpdated || new Date().toISOString(), // Initialize with current date-time for new issues
+    lastUpdated: issue?.lastUpdated || new Date().toISOString(),
   });
 
   useEffect(() => {
-    // When issue prop changes, update form state
     if (issue) {
       setNewIssue(prev => ({
         ...prev,
-        project: parseInt(projectId, 10), // Convert projectId to integer during update
+        project: parseInt(projectId, 10),
         issueDescription: issue.issueDescription,
         siteBuilding: issue.siteBuilding,
         requestedBy: issue.requestedBy,
@@ -73,7 +73,7 @@ const IssueForm = forwardRef(({
     formData.append('issueId', issue ? issue.id : 'new');
   
     try {
-      const response = await fetch('http://localhost:3001/upload', {
+      const response = await fetch('http://localhost:3002/upload', {
         method: 'POST',
         body: formData,
       });
@@ -93,10 +93,9 @@ const IssueForm = forwardRef(({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Upload file if attached
     let filePath;
     if (newIssue.attachedFile) {
-      filePath = await uploadFile(); // handle await properly
+      filePath = await uploadFile();
     }
 
     const issueWithLastUpdated = {
@@ -106,8 +105,7 @@ const IssueForm = forwardRef(({
       lastUpdated: new Date().toISOString(),
     };
 
-    // First, try to create/update the issue
-    fetch(`http://localhost:3001/issues${issue ? `/${issue.id}` : ''}`, {
+    fetch(`http://localhost:3002/issues${issue ? `/${issue.id}` : ''}`, {
       method: issue ? 'PUT' : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(issueWithLastUpdated),
@@ -120,31 +118,30 @@ const IssueForm = forwardRef(({
     })
     .then(data => {
       console.log('Issue saved successfully:', data);
-      hideForm(); // Hide the form
-      setNewIssue({}); // Reset the form state
-      onIssueSubmitSuccess(); // Trigger any success actions
-      if (data.engineer) { // Condition to trigger email notification
+      hideForm();
+      setNewIssue({});
+      onIssueSubmitSuccess();
+      if (data.engineer) {
         sendEmailNotification(data);
       }
     })
     .catch(error => {
       console.error('Error:', error);
-      // Here you could update the state to show the error to the user, e.g., setError(error.toString());
     });
   };
 
   function sendEmailNotification(issue) {
-    console.log("Attempting to send email notification", issue);
     const engineer = engineers.find(engineer => engineer.name === issue.engineer);
     if (engineer && engineer.email) {
-      console.log(`Sending email to ${engineer.email}`);
       fetch('http://localhost:3001/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: engineer.email,
           subject: `Assigned Issue: ${issue.issueDescription}`,
-          text: `You have been assigned an issue: ${issue.issueDescription} in project ${issue.projectName}. Please check your dashboard for more details.`
+          text: `You have been assigned an issue: ${issue.issueDescription} in project ${getProjectNameById(issue.project)}. Please check your dashboard for more details.`,
+          project: getProjectNameById(issue.project),
+          issueDetails: JSON.stringify(issue, null, 2)
         })
       })
       .then(response => response.json())
@@ -297,7 +294,7 @@ const IssueForm = forwardRef(({
           <label>Engineer:</label>
           <select
             name="engineer"
-            value={newIssue.engineer}  // Ensure this value is used
+            value={newIssue.engineer}
             onChange={handleInputChange}
             required
           >

@@ -40,13 +40,13 @@ const KpiComponent = () => {
   });
 
   useEffect(() => {
-    fetch('http://localhost:3001/projects')
+    fetch('http://localhost:3002/projects')
       .then(res => res.json())
       .then(setProjects);
-    fetch('http://localhost:3001/issues')
+    fetch('http://localhost:3002/issues')
       .then(res => res.json())
       .then(setIssues);
-    fetch('http://localhost:3001/engineers')
+    fetch('http://localhost:3002/engineers')
       .then(res => res.json())
       .then(setEngineers);
   }, []);
@@ -58,7 +58,7 @@ const KpiComponent = () => {
       setTotalServiceHours(0);
       return;
     }
-    fetch(`http://localhost:3001/projects/${projectId}`)
+    fetch(`http://localhost:3002/projects/${projectId}`)
       .then(response => response.json())
       .then(project => {
         setSelectedProject(project);
@@ -68,7 +68,7 @@ const KpiComponent = () => {
   };
 
   const fetchProjectIssues = (projectId) => {
-    fetch(`http://localhost:3001/issues?project=${projectId}`)
+    fetch(`http://localhost:3002/issues?project=${projectId}`)
       .then(response => response.json())
       .then(data => {
         setIssues(data);

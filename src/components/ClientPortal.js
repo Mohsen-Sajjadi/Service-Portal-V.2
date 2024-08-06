@@ -16,6 +16,7 @@ const ClientPortalComponent = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({});
   const [currentFilter, setCurrentFilter] = useState('All Items');
+  const [engineers, setEngineers] = useState([]); // Add state for engineers
   const issueFormRef = useRef(null);
   const [filters, setFilters] = useState({
     searchText: '',
@@ -37,7 +38,7 @@ const ClientPortalComponent = () => {
   useEffect(() => {
     const fetchProjectData = () => {
       if (isAuthenticated && user.email) {
-        fetch(`http://localhost:3001/projects?email=${encodeURIComponent(user.email)}`)
+        fetch(`http://localhost:3002/projects?email=${encodeURIComponent(user.email)}`)
           .then(response => response.json())
           .then(data => {
             if (data.length > 0) {
@@ -51,14 +52,22 @@ const ClientPortalComponent = () => {
     };
 
     const fetchAllProjects = () => {
-      fetch('http://localhost:3001/projects')
+      fetch('http://localhost:3002/projects')
         .then(response => response.json())
         .then(data => setProjects(data))
         .catch(error => console.error('Error fetching all projects:', error));
     };
 
+    const fetchEngineers = () => {
+      fetch('http://localhost:3002/engineers')
+        .then(response => response.json())
+        .then(data => setEngineers(data))
+        .catch(error => console.error('Error fetching engineers data:', error));
+    };
+
     fetchProjectData();
     fetchAllProjects();
+    fetchEngineers(); // Fetch engineers data
   }, [isAuthenticated, user]);
 
   const getProjectNameById = (projectId) => {
@@ -100,7 +109,7 @@ const ClientPortalComponent = () => {
   console.log(project);
   console.log(projects);
 
-  const filteredIssues = projectIssues.filter(issue => {
+  const filteredIssues = projectIssues?.filter(issue => {
     const createdDate = new Date(issue.createdDate);
     const scheduleDate = new Date(issue.scheduleDate);
     const dateOfService = new Date(issue.dateOfService);
@@ -126,7 +135,7 @@ const ClientPortalComponent = () => {
       (!filters.serviceType || issue.serviceType.toLowerCase().includes(filters.serviceType.toLowerCase())) &&
       (!filters.hours || issue.hours.toString().toLowerCase().includes(filters.hours.toLowerCase()))
     );
-  });
+  }) || [];
 
   const getStatusClassName = (status) => {
     switch (status) {
@@ -141,7 +150,7 @@ const ClientPortalComponent = () => {
     console.log('Row clicked', issue);
     setModalContent({
       ...issue,
-      attachedFileUrl: issue.attachedFile ? `http://localhost:3001/${issue.attachedFile}` : null,
+      attachedFileUrl: issue.attachedFile ? `http://localhost:3002/${issue.attachedFile}` : null,
     });
     setShowModal(true);
   };
@@ -174,7 +183,7 @@ const ClientPortalComponent = () => {
   };
 
   const onRemoveIssue = (issueId) => {
-    fetch(`http://localhost:3001/issues/${issueId}`, {
+    fetch(`http://localhost:3002/issues/${issueId}`, {
       method: 'DELETE',
     })
     .then(response => {
@@ -199,7 +208,7 @@ const ClientPortalComponent = () => {
 
   useEffect(() => {
     if (project) {
-      fetch(`http://localhost:3001/issues?project=${project.id}`)
+      fetch(`http://localhost:3002/issues?project=${project.id}`)
         .then(response => response.json())
         .then(data => setProjectIssues(data))
         .catch(error => console.error('Error fetching project issues:', error));
@@ -207,7 +216,7 @@ const ClientPortalComponent = () => {
   }, [project]);
 
   const handleIssueSubmitSuccess = () => {
-    fetch(`http://localhost:3001/issues?project=${project.id}`)
+    fetch(`http://localhost:3002/issues?project=${project.id}`)
       .then(response => response.json())
       .then(data => setProjectIssues(data))
       .catch(error => console.error('Error refetching project issues:', error));
@@ -245,6 +254,8 @@ const ClientPortalComponent = () => {
               issue={selectedIssue}
               onIssueSubmitSuccess={handleIssueSubmitSuccess}
               onRemoveIssue={onRemoveIssue}
+              engineers={engineers} // Pass engineers to IssueFormClient
+              getProjectNameById={getProjectNameById} // Pass the function as a prop
             />
           )}
 
@@ -323,7 +334,7 @@ const ClientPortalComponent = () => {
                   <td>{issue.requestedBy}</td>
                   <td>{issue.createdDate}</td>
                   <td>{issue.label}</td>
-                  <td>{issue.attachedFile ? <a href={`http://localhost:3001/${issue.attachedFile}`} target="_blank" rel="noopener noreferrer">Download</a> : ''}</td>
+                  <td>{issue.attachedFile ? <a href={`http://localhost:3002/${issue.attachedFile}`} target="_blank" rel="noopener noreferrer">Download</a> : ''}</td>
                   <td>{issue.priority}</td>
                   <td>{issue.scheduleDate}</td>
                   <td>{issue.dateOfService}</td>

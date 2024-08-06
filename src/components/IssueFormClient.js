@@ -2,7 +2,7 @@ import React, { useState, useEffect, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue, onIssueSubmitSuccess }, ref) => {
+const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue, onIssueSubmitSuccess, getProjectNameById }, ref) => {
     const [newIssue, setNewIssue] = useState({
         project: projectId,
         issueDescription: issue?.issueDescription || '',
@@ -77,7 +77,6 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
             });
         }
 
-        // Submit the issue here
         const issueWithLastUpdated = {
             ...newIssue,
             project: parseInt(projectId, 10),
@@ -89,7 +88,7 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
             }),
         };
         const method = issue ? 'PUT' : 'POST';
-        const url = `http://localhost:3001/issues${issue ? `/${issue.id}` : ''}`;
+        const url = `http://localhost:3002/issues${issue ? `/${issue.id}` : ''}`;
 
         fetch(url, {
             method: method,
@@ -108,7 +107,9 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
             const emailData = {
                 to: "mohsen@triton-concepts.com",
                 subject: `New Issue Created: ${newIssue.issueDescription.substring(0, 20)}...`,
-                text: `A new issue has been created with the following details:\n\nDescription: ${newIssue.issueDescription}\nPriority: ${newIssue.priority}\nStatus: ${newIssue.status}\n\nPlease check the portal for more details.`
+                text: `A new issue has been created with the following details:\n\nDescription: ${newIssue.issueDescription}\nPriority: ${newIssue.priority}\nStatus: ${newIssue.status}\n\nPlease check the portal for more details.`,
+                project: getProjectNameById(projectId),
+                issueDetails: JSON.stringify(issueWithLastUpdated, null, 2) // Format issue details
             };
 
             return fetch('http://localhost:3001/send-email', {
@@ -140,7 +141,7 @@ const IssueFormClient = forwardRef(({ projectId, hideForm, issue, onRemoveIssue,
         formData.append('issueId', issue ? issue.id : 'new');
       
         try {
-          const response = await fetch('http://localhost:3001/upload', {
+          const response = await fetch('http://localhost:3002/upload', {
             method: 'POST',
             body: formData,
           });
