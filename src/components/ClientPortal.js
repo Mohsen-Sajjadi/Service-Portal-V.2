@@ -84,24 +84,26 @@ const ClientPortalComponent = () => {
   };
 
   const prepareIssuesForDownload = (issues) => {
-    return issues.map(issue => ({
-      ...issue,
-      projectName: getProjectNameById(issue.project),
-      project: undefined
-    }));
+    return issues.map(issue => {
+      const { project, projectId, id, ...rest } = issue;
+      return {
+        ...rest,
+        projectName: getProjectNameById(issue.project),
+      };
+    });
   };
-
+  
   const handleDownloadIssuesCSV = () => {
     if (!project) {
       console.error('No project selected.');
       return;
     }
-
+  
     const projectName = project.project;
     const dateStr = formatDate(new Date());
     const filename = `${projectName.replace(/ /g, '_')}_${dateStr}.csv`;
     console.log(`Downloading CSV as: ${filename}`);
-
+  
     const preparedIssues = prepareIssuesForDownload(filteredIssues);
     downloadCSV(preparedIssues, filename);
   };

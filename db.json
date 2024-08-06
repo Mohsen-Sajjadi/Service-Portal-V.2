@@ -1,7 +1,7 @@
 {
   "projects": [
     {
-      "project": "TSN_301262_Scripps College - Svc Agreement 2024",
+      "project": "Scripps College - Svc Agreement 2024",
       "client": "Scripps College",
       "address": "1030 Columbia Avenue, Claremont, CA 91711",
       "email": "mohsen.sajadi@gmail.com",
@@ -12,7 +12,7 @@
       "id": 1
     },
     {
-      "project": "TSN_301265_Eurofins- Service Agreement 2024",
+      "project": "Eurofins- Service Agreement 2024",
       "client": "Eurofins Environment Testing Southwest, LLC",
       "address": "421 South 9th Street, Baton Rouge, LA 70802",
       "email": "isaac@triton-concepts.com",
@@ -23,7 +23,7 @@
       "id": 2
     },
     {
-      "project": "TSN_301165_ULV- Service Agreement 2024-25",
+      "project": "ULV- Service Agreement 2024-25",
       "client": "Facility Services Partners c/o ULV",
       "address": "421 South 9th Street, Baton Rouge, LA 70802",
       "email": "exampleemail@mail.com",
@@ -34,7 +34,7 @@
       "id": 3
     },
     {
-      "project": "TSN_301185_Huntington Hospital- Svc Agreement 2023-24",
+      "project": "Huntington Hospital- Svc Agreement 2023-24",
       "client": "Huntington Hospital",
       "address": "133 N Altadena Dr #2, Pasadena, CA 91107",
       "totalServiceHoursIncluded": "240",
@@ -56,7 +56,7 @@
       "totalServiceHoursIncluded": "160"
     },
     {
-      "project": "TSN_301195_LMU- Service Agreement 2023-24",
+      "project": "LMU- Service Agreement 2023-24",
       "client": "Loyola Marymount University",
       "address": "1 Loyola Marymount University Dr, Los Angeles, CA 90045",
       "email": "clientemail@example.com",
@@ -66,7 +66,7 @@
       "id": 6
     },
     {
-      "project": "TSN_301198_Pomona College- Svc Agreement 2023-24",
+      "project": "Pomona College- Svc Agreement 2023-24",
       "client": "Pomona College",
       "address": "333 N College Way, Claremont, CA 91711",
       "email": "clientemail@example.com",
@@ -76,7 +76,7 @@
       "id": 7
     },
     {
-      "project": "TSN_301257_Dendreon- Service Agreement 2024",
+      "project": "Dendreon- Service Agreement 2024",
       "client": "Dendreon- Seal Beach Receiving Warehouse",
       "address": "1700 Saturn Way, Seal Beach, CA 90740",
       "email": "clientemail@example.com",
@@ -86,7 +86,7 @@
       "id": 8
     },
     {
-      "project": "TSN_301172_Takeda - TO Service Agreement",
+      "project": "Takeda - TO Service Agreement",
       "client": "Baxalta US Inc.",
       "address": "1700 Rancho Conejo Blvd, Thousand Oaks, CA 91320",
       "email": "clientemail@example.com",
@@ -98,7 +98,7 @@
     {
       "username": "clientemail@example.com",
       "email": "clientemail@example.com",
-      "project": "TSN_301247_MCH- Service Agreement 2023-24",
+      "project": "MCH- Service Agreement 2023-24",
       "client": "Mission Community Hospital",
       "address": "14850 Roscoe Blvd, Panorama City, CA 91402",
       "startDate": "2023-11-27",
@@ -108,7 +108,7 @@
     {
       "username": "clientemail@example.com",
       "email": "clientemail@example.com",
-      "project": "TSN_301203_PPG- Service Agreement 2023-24",
+      "project": "PPG- Service Agreement 2023-24",
       "client": "PolyPeptide Laboratories Inc",
       "address": "365 Maple Ave, Torrance, CA 90503",
       "startDate": "2023-06-01",

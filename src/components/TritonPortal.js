@@ -344,7 +344,7 @@ const TritonPortalComponent = () => {
   const getProjectNameById = (projectId) => {
     const project = projects.find(proj => proj.id.toString() === projectId.toString());
     return project ? project.project : 'Unknown Project';
-  };
+};
 
   // Function to format current date as YYYY-MM-DD
   const formatDate = (date) => {
@@ -357,35 +357,27 @@ const TritonPortalComponent = () => {
   };
 
   const prepareIssuesForDownload = (issues) => {
-    return issues.map(issue => ({
-      ...issue,
-      projectName: getProjectNameById(issue.project), // Add the project name
-      project: undefined // Optionally remove the project ID if it's not needed
-    }));
+    return issues.map(issue => {
+      const { project, projectId, id, ...rest } = issue;
+      return {
+        ...rest,
+        projectName: getProjectNameById(issue.project),
+      };
+    });
   };
-
-  // Adjusted button onClick handler for downloading issues CSV
+  
   const handleDownloadIssuesCSV = () => {
-    // Debugging: Log the projects and selectedProjectId to see what they contain
-    console.log('Projects:', projects);
-    console.log('Selected Project ID:', selectedProjectId);
-
-    // Find the project using the selectedProjectId
-    const selectedProject = projects.find(proj => proj.id === parseInt(selectedProjectId, 10));
-
-    // Check if selectedProject is undefined
-    if (!selectedProject) {
-      console.error('Selected project not found.');
-      return; // Stop the function if no project is found
+    if (!project) {
+      console.error('No project selected.');
+      return;
     }
-
-    const projectName = selectedProject.project;
+  
+    const projectName = project.project;
     const dateStr = formatDate(new Date());
-    const filename = `${projectName.replace(/ /g, '_')}_${dateStr}.csv`; // Create a file name with the project name and current date
+    const filename = `${projectName.replace(/ /g, '_')}_${dateStr}.csv`;
     console.log(`Downloading CSV as: ${filename}`);
-    
-    // Assuming 'prepareIssuesForDownload' returns the correct format for your CSV
-    const preparedIssues = prepareIssuesForDownload(filteredIssues); // Use 'projectIssues' if it holds the correct issues
+  
+    const preparedIssues = prepareIssuesForDownload(filteredIssues);
     downloadCSV(preparedIssues, filename);
   };
 
