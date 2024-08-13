@@ -9,7 +9,6 @@ import logo from './triton-logo.png';
 import './App.css';
 import RequireRole from './components/RequireRole';
 
-// Define the LogoutButton component
 const LogoutButton = () => {
   const { logout } = useAuth0();
 
@@ -21,7 +20,7 @@ const LogoutButton = () => {
 };
 
 function App() {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
 
   const loginToClientPortal = () => {
     loginWithRedirect({
@@ -47,8 +46,13 @@ function App() {
             <li><Link to="/">Home</Link></li>
             <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/client">Client Portal</Link></li>
             <li onClick={() => !isAuthenticated && loginWithRedirect()}><Link to="/triton">Admin Portal</Link></li>
-            {isAuthenticated && <li className="logout-button"><LogoutButton /></li>}
           </ul>
+          {isAuthenticated && (
+            <div className="nav-user-info">
+              <span className="user-name">Welcome, {user.name}</span>
+              <LogoutButton />
+            </div>
+          )}
         </nav>
         <main className="app-main">
           <Routes>
